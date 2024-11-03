@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1 Sign up Form 
+    form(action="/verzend", method="post") 
+        p 
+            label(for="naam") Naam: 
+            input(type="text", name="naam") 
+        p 
+            label(for="email") Email: 
+            input(type="text", name="email") 
+        p 
+            label(for="woonplaats") Woonplaats:
+            input(type="text", name="woonplaats")
+        p
+            button(type="submit") Submit
