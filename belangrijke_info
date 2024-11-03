@@ -1,0 +1,3 @@
+mongodb user , pswd : thibautbeckske : kl5wkamcbiJZcATq
+applicatie runnen node ./bin/www
+of als je wil dat die blijft runnen moet je nodemon ./bin/www doen
