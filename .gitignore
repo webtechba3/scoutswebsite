@@ -1,0 +1,8 @@
+.vscode/*
+*.log
+.env
+node_modules
+.env.local
+.git
+.svn
+.hg
