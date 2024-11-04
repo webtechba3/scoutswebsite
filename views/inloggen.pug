@@ -1,0 +1,43 @@
+extends layout
+
+    
+block content
+    h1 Inloggen
+    form(action="/inloggen/verzendInlogForm", method="post" id = "inlogForm" enctype="application/x-www-form-urlencoded") 
+        p
+            label(for="email") Email: 
+            div
+                input(type="email", name="email" placeholder="Voer uw email in") 
+        p 
+            label(for="password") Wachtwoord:
+            div
+                input#password(type="password" placeholder="Voer uw wachtwoord in")
+                span.toggle-password(onclick="togglePasswordbol()") 👁️
+        p
+            button(type="submit") log in   
+    script(src="/public/javascripts/inloggenfe.js")
+    script. 
+        function togglePasswordbol() {
+                const passwordField = document.getElementById('password');
+                passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
+                }
+                
+                buttonsubmit.addEventListener('click', () => { // lambda-functie
+    
+                const form = document.getElementById('inlogForm');
+
+                $.ajax({
+                url: form.action,
+                type: 'POST',
+                data: $(form).serialize(), // Verzamelt alle form-data
+                success: function(result) {
+                    console.log(result);
+                    // Voer hier acties uit bij succes, zoals een melding weergeven
+                    form.reset(); // Leeg het formulier
+                },
+                error: function(err) {
+                    console.error(err);
+                    // Verwerk hier fouten, bijvoorbeeld door een melding weer te geven
+                }
+                });
+                });

@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const inlogRouter = require('./routes/inloggen');
 const imagesRouter = require('./routes/images');
 const inschrijvenRouter = require('./routes/inschrijven'); // Dit importeert de inschrijvenRouter
 const app = express();
@@ -20,9 +20,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/images', imagesRouter); // Dit zorgt ervoor dat de imagesRouter wordt gebruikt wanneer de URL begint met `/images`
-app.use('/inschrijven', inschrijvenRouter); // Dit zorgt ervoor dat de inschrijvenRouter wordt gebruikt wanneer de URL begint met `/inschrijven`
+app.use('/users', inlogRouter);
+app.use('/images', imagesRouter); 
+app.use('/inschrijven', inschrijvenRouter); 
+app.use('/inloggen', inlogRouter); 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
