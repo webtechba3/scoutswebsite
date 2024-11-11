@@ -5,15 +5,18 @@ block content
     form(action="/inschrijven/verzendSignUpForm", method="post" id = "signupForm" enctype="application/x-www-form-urlencoded") 
         p 
             label(for="naam") Naam: 
-            input(type="text", name="naam" required) 
+            input(type="text", name="naam" required placeholder="Voer uw achternaam in") 
+        p 
+            label(for="naam") Voornaam: 
+            input(type="text", name="voornaam" required placeholder="Voer uw voornaam in")  
         p 
             label(for="email") Email: 
-            input(type="email", name="email" required) 
+            input(type="email", name="email" required placeholder="Voer uw email in") 
         p 
             label(for="woonplaats") Woonplaats:
-            input(type="text", name="woonplaats" required)
+            input(type="text", name="woonplaats" required placeholder="Voer uw woonplaats in") 
         p
             button(type="submit") verzend
-        if message
-            p #{message} 
+      
         script (src="/public/javascripts/inschrijvenfe.js")
+    

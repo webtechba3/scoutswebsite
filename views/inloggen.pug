@@ -11,33 +11,10 @@ block content
         p 
             label(for="password") Wachtwoord:
             div
-                input#password(type="password" placeholder="Voer uw wachtwoord in")
+                input#password(type="password" name = "password" placeholder="Voer uw wachtwoord in")
                 span.toggle-password(onclick="togglePasswordbol()") 👁️
         p
             button(type="submit") log in   
-    script(src="/public/javascripts/inloggenfe.js")
-    script. 
-        function togglePasswordbol() {
-                const passwordField = document.getElementById('password');
-                passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
-                }
-                
-                buttonsubmit.addEventListener('click', () => { // lambda-functie
-    
-                const form = document.getElementById('inlogForm');
+        script(src="/javascripts/inloggenfe.js")
 
-                $.ajax({
-                url: form.action,
-                type: 'POST',
-                data: $(form).serialize(), // Verzamelt alle form-data
-                success: function(result) {
-                    console.log(result);
-                    // Voer hier acties uit bij succes, zoals een melding weergeven
-                    form.reset(); // Leeg het formulier
-                },
-                error: function(err) {
-                    console.error(err);
-                    // Verwerk hier fouten, bijvoorbeeld door een melding weer te geven
-                }
-                });
-                });
+        
