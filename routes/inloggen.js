@@ -19,8 +19,9 @@ async function checkUserCredentials(req, email, password) {
     // het gewone passwoord moet niet gehashed worden, terwijl user.password wel gehashed is
     console.log(user.psswd , " user.password");
     console.log(password , " password");
-    //return await bcrypt.compare( user.psswd , password);
-    return password === user.password;
+  
+    return await bcrypt.compare( user.psswd , password);
+    //return password === user.password;
     
   } catch (error) {
     console.error("Fout bij het controleren van gebruikersgegevens:", error);
@@ -30,7 +31,7 @@ async function checkUserCredentials(req, email, password) {
 
 router.post('/verzendInlogForm', async (req, res) => {
   const { email, password } = req.body;
-  if (checkUserCredentials(req, email, password) === false) {
+  if (checkUserCredentials(req, email, password) === true) {
     console.log('Gebruiker ingelogd');
   }
   // userCollection is de collection van de gebruikers
