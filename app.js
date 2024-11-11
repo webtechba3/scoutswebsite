@@ -11,6 +11,7 @@ const inlogRouter = require('./routes/inloggen');
 const imagesRouter = require('./routes/images');
 const voegUsersToeRouter = require('./routes/voegUsersToe');
 const inschrijvenRouter = require('./routes/inschrijven'); // Dit importeert de inschrijvenRouter
+
 const app = express();
 
 // view engine setup
@@ -27,6 +28,7 @@ app.use('/users', inlogRouter);
 app.use('/images', imagesRouter); 
 app.use('/inschrijven', inschrijvenRouter); 
 app.use('/inloggen', inlogRouter); 
+
 app.use('/voegUserToe', voegUsersToeRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
