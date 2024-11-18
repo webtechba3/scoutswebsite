@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const randomstringgenerator = require('crypto');
+const session = require('express-session');
 const bcrypt = require('bcrypt');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -33,6 +34,12 @@ router.post('/verzendInlogForm', async (req, res) => {
   const { email, password } = req.body;
   if (checkUserCredentials(req, email, password) === true) {
     console.log('Gebruiker ingelogd');
+    const user = await req.app.locals.usersCollection.findOne({ email });
+    //Het is nodig om naar req.session te kijken omdat de sessie alle gebruikersspecifieke gegevens bevat die je gedurende de gebruikerssessie wilt bijhouden, zoals of de gebruiker een leiding is, wat hun voornaam en achternaam zijn, of welke tak ze hebben.
+    req.session.achternaam = user.naam; // Zorg ervoor dat je username in je database hebt
+    req.session.voornaam = user.voornaam;
+    req.session.tak = user.tak; 
+    req.session.role = "leiding" // geef die de rol van leiding
   }
   // userCollection is de collection van de gebruikers
   

@@ -4,6 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require("mongoose"); 
+const session = require('express-session');
+const crypto = require('crypto');
 
 
 const indexRouter = require('./routes/index');
@@ -13,6 +15,7 @@ const voegUsersToeRouter = require('./routes/voegUsersToe');
 const inschrijvenRouter = require('./routes/inschrijven'); // Dit importeert de inschrijvenRouter
 const takkenRouter = require('./routes/takken');
 const activiteitenRouter = require('./routes/activiteiten');
+const takRouter = require('./routes/tak');
 
 const app = express();
 
@@ -32,6 +35,7 @@ app.use('/inschrijven', inschrijvenRouter);
 app.use('/inloggen', inlogRouter); 
 app.use('/takken', takkenRouter);
 app.use('/activiteiten', activiteitenRouter);
+app.use('/tak', takRouter);
 
 
 app.use('/voegUserToe', voegUsersToeRouter);
@@ -39,6 +43,17 @@ app.use('/voegUserToe', voegUsersToeRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+const secretKey = crypto.randomBytes(64).toString('hex'); // Gebruik een veilige, willekeurige sleutel
+
+// Sessies configureren
+app.use(session({
+  secret: secretKey, // Gebruik de gegenereerde geheime sleutel
+  resave: false,
+  name: 'SessionID', // Geef de sessie een naam
+  saveUninitialized: true,
+  cookie: { secure: true } // Zet op true als je HTTPS gebruikt
+}));
+
 
 // error handler
 app.use(function(err, req, res, next) {
