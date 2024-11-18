@@ -1,29 +1,30 @@
 extends layout
 
 block content
-    section
-        h2 maak een nieuwe activieit aan 
-        form(action="/activiteit" method="POST")
-        div
-            label(for="title") Titel
-            p
-            input(type="text" id="title" name="title" required)
+    if role === 'leiding'
+        section
+            h2 maak een nieuwe activieit aan 
+            form(action="/activiteit" method="POST")
+            div
+                label(for="title") Titel
+                p
+                input(type="text" id="title" name="title" required)
 
-        div
-            label(for="message") Bericht
-            p
-            textarea(id="message" name="message" rows="4" required)
+            div
+                label(for="message") Bericht
+                p
+                textarea(id="message" name="message" rows="4" required)
 
-        div
-            label(for="target") Doelgroep
-            p
-            select(id="target" name="target" required)
-                option( value= "nietglobaal") Het is geen globaal bericht
-                option(value="globaal") Globaal bericht
-        
+            div
+                label(for="target") Doelgroep
+                p
+                select(id="target" name="target" required)
+                    option( value= "nietglobaal") Het is geen globaal bericht
+                    option(value="globaal") Globaal bericht
+            
 
-        button(type="submit") Verstuur
-        script(src="/javascripts/activiteitfe.js")
+            button(type="submit") Verstuur
+            script(src="/javascripts/activiteitfe.js")
 
     h2 Activiteiten
     p hier moeten de globale activiteiten komen 

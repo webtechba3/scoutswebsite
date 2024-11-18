@@ -7,6 +7,22 @@ const mongoose = require("mongoose");
 const session = require('express-session');
 const crypto = require('crypto');
 
+const app = express();
+// Sessies configureren
+const secretKey = crypto.randomBytes(64).toString('hex'); // Gebruik een veilige, willekeurige sleutel
+app.use(session({
+  secret: secretKey, // Gebruik de gegenereerde geheime sleutel, voor te ontcijferen wat de user sessie is.
+  resave: false,
+  name: 'SessionID', // Geef de sessie een naam
+  saveUninitialized: true,
+  cookie: { secure: false } // Zet op true als je HTTPS gebruikt
+}));
+// Middleware om sessie-informatie beschikbaar te maken in alle Pug-templates
+app.use((req, res, next) => {
+  res.locals.role = req.session ? req.session.role : null;
+  next();
+});
+
 
 const indexRouter = require('./routes/index');
 const inlogRouter = require('./routes/inloggen');
@@ -17,7 +33,7 @@ const takkenRouter = require('./routes/takken');
 const activiteitenRouter = require('./routes/activiteiten');
 const takRouter = require('./routes/tak');
 
-const app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,16 +59,8 @@ app.use('/voegUserToe', voegUsersToeRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
-const secretKey = crypto.randomBytes(64).toString('hex'); // Gebruik een veilige, willekeurige sleutel
 
-// Sessies configureren
-app.use(session({
-  secret: secretKey, // Gebruik de gegenereerde geheime sleutel
-  resave: false,
-  name: 'SessionID', // Geef de sessie een naam
-  saveUninitialized: true,
-  cookie: { secure: true } // Zet op true als je HTTPS gebruikt
-}));
+
 
 
 // error handler

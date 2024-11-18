@@ -4,7 +4,7 @@ header
       a(href="/")
         h1 Sint-Martinus scouts 
     ul.nav-links
-      
+      p Rol: #{role || 'geen rol'}
       li
         a(href="/takken") Takken
         ul.dropdown
@@ -16,8 +16,14 @@ header
           li: a(href="/tak/jin") Jin
           li: a(href="/tak/leiding") Leiding
       li: a(href="/activiteiten") Activiteiten
-      li: a(href="/voegUserToe") Voeg User Toe
+      if role === 'leiding'
+        li: a(href="/voegUserToe") Voeg User Toe
       li: a(href="/#contact") Contact
       li: a(href="/#about") Over Ons
       li: a(href="/inschrijven") Nieuwe Leden
-      li: a(href="/inloggen") Inloggen
+      if role === 'leiding'
+        li: a(href="/uitloggen") Uitloggen
+      else 
+        li: a(href="/inloggen") Inloggen
+
+      
