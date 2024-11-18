@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    h1 Veog nieuw Account toe
+    h1 Veog nieuw Leiders Account toe
     form(action="/voegUserToe/voegToe", method="post" id = "voegNieuwAccountToe" enctype="application/x-www-form-urlencoded") 
         p 
             label(for="naam") Naam: 
@@ -15,6 +15,16 @@ block content
         p 
             label(for="wachtwoord") Wachtwoord: 
             input(type="text", name="wachtwoord" required placeholder="voer het wachtwoord in") 
+        p 
+            label(for="rol") Rol: 
+            select(name="rol")
+                option(value="Kapoenen") Kapoenen 
+                option(value="welpen") Welpen
+                option(value="Roeland") Roeland
+                option(value="Parcival") Parcival 
+                option(value="Giivers") Givers
+                option(value="Jins") Jins
+                option(value="gebruiker") Gebruiker
         p
             button(type="submit") sla op
         if message 

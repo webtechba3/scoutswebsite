@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const randomstringgenerator = require('crypto');
 const bcrypt = require('bcrypt');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -21,7 +21,7 @@ async function checkUserCredentials(req, email, password) {
     console.log(password , " password");
   
     //return await bcrypt.compare( user.psswd , password);
-    //return password === user.password;
+    return password === user.password;
     
   } catch (error) {
     console.error("Fout bij het controleren van gebruikersgegevens:", error);
