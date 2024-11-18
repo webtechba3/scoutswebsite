@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Scoutswebsite' });
+  res.render('index', { title: 'Sint-Martinus scouts Ieper' });
 });
 router.get('/cookie-policy', function(req, res, next) {
   res.render('cookie-policy');

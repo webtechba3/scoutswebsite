@@ -1,7 +1,21 @@
-nav
-  ul
-    li: a(href='/') Home
-    li: a(href='/kalender') Kalender
-    li: a(href='/images') Images
-    li: a(href='/inschrijven')  Inschrijven 
-    li: a(href='/inloggen') Inloggen
+header
+  .navbar
+    .logo
+      a(href="/")
+        h1 Sint-Martinus scouts 
+    ul.nav-links
+      li: a(href="/") Home
+      li
+        a(href="/takken") Takken
+        ul.dropdown
+          li: a(href="/kapoenen") Kapoenen
+          li: a(href="/welpen") Welpen
+          li: a(href="/roeland") Roeland
+          li: a(href="/parcival") Parcival
+          li: a(href="/givers") Givers
+          li: a(href="/jin") Jin
+          li: a(href="/leiding") Leiding
+      li: a(href="#portfolio") Activiteiten
+      li: a(href="#contact") Contact
+      li: a(href="/inschrijven") Nieuwe Leden
+      li: a(href="/inloggen") Inloggen

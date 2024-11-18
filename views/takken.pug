@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  .takken-container
+    each tak in takken
+      .tak
+        a(href=`/tak/${tak.slug}`)
+          img(src=`/images/${tak.image}` alt=tak.name class="tak-image")
+          span.tak-name= tak.name

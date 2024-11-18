@@ -1,0 +1,171 @@
+/* Algemene Body Stijl */
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Lora", serif;
+  background-color: #CABA9C;
+  color: #4D2D18;
+}
+
+/* Links */
+a {
+  color: #4C6444;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #8A6240;
+}
+
+/* Navigatiebalk */
+header {
+  background-color: #4C6444; /* Hunter green */
+  padding: 15px 20px; /* Initiële padding */
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  transition: padding 0.3s ease;
+}
+
+/* Logo Stijl */
+.logo {
+  margin-right: auto; /* Zorgt ervoor dat het logo links staat */
+}
+
+.logo-img {
+  height: 40px; /* Pas de grootte van het logo aan naar wens */
+}
+
+/* Nav-links */
+.nav-links {
+  text-align: right;
+  list-style-type: none;
+  display: flex;
+  gap: 20px; /* Ruimte tussen de links */
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  color: #CABA9C; /* Khaki kleur voor de tekst */
+  font-weight: 500;
+  text-decoration: none;
+  padding: 10px 15px;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #8A6240; /* Raw umber kleur bij hover */
+}
+
+/* Verkleinen bij scrollen */
+header.scrolled {
+  padding: 10px 20px; /* Kleinere padding bij scrollen */
+}
+
+/* Hoofdinhoud Stijl */
+main.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  margin-top: 70px; /* Zorgt ervoor dat de inhoud niet overlapt met de vaste navbar */
+  padding: 20px;
+  background-color: #FFF;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Sectietitels en Tekst */
+h1, h2, h3 {
+  color: #4D2D18;
+}
+
+/* Knoppen */
+button, .button {
+  background-color: #8A6240;
+  color: #CABA9C;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover, .button:hover {
+  background-color: #4C6444;
+}
+
+/* Cookiebeleid en Privacybeleid */
+.cookie-policy,
+.privacy-policy {
+  max-width: 800px; /* Beperkt de breedte van de tekst */
+  margin: 0 auto; /* Centreert de inhoud */
+  padding: 20px; /* Voegt ruimte toe rondom de tekst */
+}
+
+.cookie-policy h2, .privacy-policy h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.cookie-policy p, .privacy-policy p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* Footer */
+footer {
+  background-color: #102820;
+  color: #CABA9C;
+  padding: 20px;
+  text-align: center;
+}
+
+footer a {
+  color: #CABA9C;
+}
+
+footer a:hover {
+  color: #8A6240;
+}
+
+/* Parallax Secties */
+.bgimg-1, .bgimg-2 {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bgimg-1 { background-image: url('/images/Groepsfoto2024'); min-height: 100vh; }
+.bgimg-2 { background-image: url('/images/Groepsfoto2024'); min-height: 400px; }
+
+@media only screen and (max-device-width: 1600px) {
+  .bgimg-1, .bgimg-2 {
+    background-attachment: scroll;
+  }
+}
+
+/* Animaties */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide-in {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.slide-in.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
