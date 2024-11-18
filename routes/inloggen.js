@@ -20,7 +20,7 @@ async function checkUserCredentials(req, email, password) {
     console.log(user.psswd , " user.password");
     console.log(password , " password");
   
-    return await bcrypt.compare( user.psswd , password);
+    //return await bcrypt.compare( user.psswd , password);
     //return password === user.password;
     
   } catch (error) {
