@@ -123,9 +123,11 @@ async function connectToDatabase() {
     app.locals.inschrijvingenCollection = inschrijvingenCollection;
     const usersCollection = db.collection('users'); // Of de naam van je users collectie
     app.locals.usersCollection = usersCollection; // Maak beschikbaar via app.locals
+    const activiteitenCollection = db.collection('activiteiten'); // Of de naam van je users collectie
+    app.locals.activiteitenCollection = activiteitenCollection; // Maak beschikbaar via app.locals
      // Maak de database en collectie beschikbaar voor je routes via app.locals
-    
-   
+    const linkuseractiviteit = db.collection('linkuseractiviteit'); // Of de naam van je users collectie
+   app.locals.linkuseractiviteit = linkuseractiviteit; // Maak beschikbaar via app.locals
 
 
 

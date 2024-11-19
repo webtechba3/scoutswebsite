@@ -2,9 +2,8 @@ extends layout
 
 block content
     if role === 'leiding'
-        section
-            h2 maak een nieuwe activieit aan 
-            form(action="/activiteit" method="POST")
+        h2 Maak een nieuwe activiteit aan 
+        form(action="/activiteiten/postactiviteit" method="POST" id="activiteitForm")
             div
                 label(for="title") Titel
                 p
@@ -13,18 +12,52 @@ block content
             div
                 label(for="message") Bericht
                 p
-                textarea(id="message" name="message" rows="4" required)
+                textarea(id="message" name="message" rows="8" required)
 
             div
                 label(for="target") Doelgroep
                 p
                 select(id="target" name="target" required)
-                    option( value= "nietglobaal") Het is geen globaal bericht
+                    option(value="nietglobaal") Het is geen globaal bericht
                     option(value="globaal") Globaal bericht
-            
 
-            button(type="submit") Verstuur
-            script(src="/javascripts/activiteitfe.js")
+            button(type="submit" id="submitActiviteit") Verstuur
+
+        script(src="/javascripts/activiteitfe.js")
+        script.
+            document.addEventListener('DOMContentLoaded', () => {
+                const activiteitForm = document.getElementById('activiteitForm');
+
+                if (activiteitForm) {
+                    activiteitForm.addEventListener('submit', async (event) => {
+                        event.preventDefault(); // Voorkom standaard submit van het formulier
+                        
+                        const formData = new FormData(activiteitForm);
+                        const data = new URLSearchParams(formData).toString();
+
+                        try {
+                            const response = await fetch('/postactiviteit', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded',
+                                },
+                                body: data,
+                            });
+
+                            if (response.ok) {
+                                const result = await response.json();
+                                console.log(result);
+                                // Voeg hier acties toe voor succes, bijvoorbeeld een succesmelding
+                                activiteitForm.reset(); // Leeg het formulier
+                            } else {
+                                console.error('Fout bij het versturen van de activiteit:', response.statusText);
+                            }
+                        } catch (error) {
+                            console.error('Er ging iets mis:', error);
+                        }
+                    });
+                }
+            });
 
     h2 Activiteiten
     p hier moeten de globale activiteiten komen 
@@ -32,5 +65,3 @@ block content
         h3 Agenda 
         p 
         iframe(src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Europe%2FBrussels&showPrint=0&src=dGhpYmF1dC5iZWNrc2tlQGdtYWlsLmNvbQ&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=Y2RkYTI4NTg1OWM5YWNkZDJmN2FlYTUxYTFkM2ZhMDZhMTkyNjRmMjBhYjFmZDdmOGVlNDQ4MjE3NjcxNzUzZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=bmwuYmUjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%237986CB&color=%2333B679&color=%23D81B60&color=%230B8043" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no")
-        p 
-    
