@@ -1,12 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-router.get('/', (req, res) => {
+const session = require('express-session');
+function requireLeiding(req, res, next) {
+    if (req.session.role === 'leiding') {
+      return next(); // Ga door naar de volgende middleware of route-handler
+    }
+    res.status(403).send('Toegang geweigerd: je hebt geen rechten om deze pagina te bekijken.');
+  }
+router.get('/',requireLeiding, (req, res) => {
     res.render('voegUsersToe');
 });
 
 // POST-route om het signup-formulier te verwerken
-router.post('/voegToe', async (req, res) => {
+router.post('/voegToe',requireLeiding, async (req, res) => {
     
     const { naam, voornaam, email, wachtwoord, tak } = req.body;
     // uncomment dit in de echte code

@@ -20,6 +20,9 @@ app.use(session({
 // Middleware om sessie-informatie beschikbaar te maken in alle Pug-templates
 app.use((req, res, next) => {
   res.locals.role = req.session ? req.session.role : null;
+  res.locals.voornaam = req.session ? req.session.voornaam : null;
+  res.locals.tak = req.session ? req.session.tak : null;
+  res.locals.achternaam = req.session ? req.session.achternaam : null;
   next();
 });
 
@@ -32,6 +35,8 @@ const inschrijvenRouter = require('./routes/inschrijven'); // Dit importeert de 
 const takkenRouter = require('./routes/takken');
 const activiteitenRouter = require('./routes/activiteiten');
 const takRouter = require('./routes/tak');
+const accountRouter = require('./routes/account');  
+
 
 
 
@@ -52,6 +57,7 @@ app.use('/inloggen', inlogRouter);
 app.use('/takken', takkenRouter);
 app.use('/activiteiten', activiteitenRouter);
 app.use('/tak', takRouter);
+app.use('/account', accountRouter);
 
 
 app.use('/voegUserToe', voegUsersToeRouter);

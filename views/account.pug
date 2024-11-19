@@ -1,0 +1,40 @@
+extends layout
+block content 
+    h2 Account
+    section
+        h3 uitloggen 
+        form(action="/logout" method="POST")
+                
+        button(type="button" id="logoutButton") uitloggen
+            
+    section
+        h3 Wijzig wachtwoord  
+        form(action="/wijzigWachtwoord" method="POST")
+        div
+
+            label(for="oudWachtwoord") Oud wachtwoord
+            p
+            input(
+            type="password"
+            id="oudWachtwoord"
+            name="oudWachtwoord"
+            required
+            minlength="8"
+            title="Het wachtwoord moet minstens 8 tekens lang zijn."
+            )
+            p 
+            label(for="nieuwWachtwoord") Nieuw wachtwoord
+            p
+            input(
+                type="password"
+                id="nieuwWachtwoord"
+                name="nieuwWachtwoord"
+                required
+                minlength="8"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}"
+                title="Het wachtwoord moet minstens 8 tekens lang zijn, en minstens één cijfer, één hoofdletter, één kleine letter, en één speciaal teken bevatten."
+                )
+            p     
+            button(type="button" id="changePasswordButton") Wijzig
+                
+    script(src="/javascripts/accountfe.js")
