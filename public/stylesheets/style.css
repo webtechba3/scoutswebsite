@@ -342,3 +342,9 @@ footer a:hover {
     background-attachment: scroll;
   }
 }
+
+#map { 
+  height: 300px;
+  width: 300px; 
+  
+  }
