@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitButton.addEventListener('click', (event) => {
             event.preventDefault(); // Voorkom standaard submit van het formulier
             $.ajax({
-                url: "/postactiviteit",
+                url: "/activiteiten/postactiviteit",
                 type: 'POST',
                 data: $(activiteitForm).serialize(), // Verzamelt alle form-data
                 success: function(result) {

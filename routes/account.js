@@ -27,6 +27,7 @@ router.post('/logout',requireLeiding ,(req, res) => {
 });
 
 router.post('/wijzigWachtwoord',requireLeiding,  async (req, res) => {   
+    console.log("/wijzigWachtwoord");
     const { oudwachtwoord , nieuwwachtwoord} = req.body; 
     if (req.session) {
         console.log('Wachtwoord wijzigen:', req.session.voornaam);

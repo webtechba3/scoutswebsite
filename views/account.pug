@@ -9,9 +9,22 @@ block content
             
     section
         h3 Wijzig wachtwoord  
-        form(action="/wijzigWachtwoord" method="POST")
-        div
+        form(action="/account/wijzigWachtwoord", method="post" id = "veranderwachtwoordform" enctype="application/x-www-form-urlencoded") 
+        p 
+            label(for="password") oud Wachtwoord:
+            div
+                input#password(type="password" name = "oldpassword" required placeholder="Voer uw wachtwoord in")
+        p 
+            label(for="password") nieuw Wachtwoord:
+            div
+                input#password(type="password" name = "newpassword" required  placeholder="Voer uw wachtwoord in")
+        p
+            button(type="submit") verander wachtwoord   
 
+        
+        
+        h4 werkt niet 
+        form(action="/wijzigWachtwoord" method="POST")
             label(for="oudWachtwoord") Oud wachtwoord
             p
             input(
@@ -19,7 +32,7 @@ block content
             id="oudWachtwoord"
             name="oudWachtwoord"
             required
-            minlength="8"
+           
             title="Het wachtwoord moet minstens 8 tekens lang zijn."
             )
             p 
@@ -30,8 +43,7 @@ block content
                 id="nieuwWachtwoord"
                 name="nieuwWachtwoord"
                 required
-                minlength="8"
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}"
+                
                 title="Het wachtwoord moet minstens 8 tekens lang zijn, en minstens één cijfer, één hoofdletter, één kleine letter, en één speciaal teken bevatten."
                 )
             p     

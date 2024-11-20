@@ -29,21 +29,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
         });
     }
+    const buttonsubmit = document.querySelector('button[type="submit"]'); 
+    buttonsubmit.addEventListener('click', () => { // lambda-functie
 
-    if (changePasswordButton && passwordForm) {
-        changePasswordButton.addEventListener('click', (event) => {
+        const form = document.getElementById('veranderwachtwoordform');
+    
+        $.ajax({
+        url: "/verzendInlogForm",
+        type: 'POST',
+        data: $(form).serialize(), // Verzamelt alle form-data
+        success: function(result) {
+            console.log(result);
+            // Voer hier acties uit bij succes, zoals een melding weergeven
+            form.reset(); // Leeg het formulier
+        },
+        error: function(err) {
+            console.error(err);
+            // Verwerk hier fouten, bijvoorbeeld door een melding weer te geven
+        }
+        });
+        });
+    
+    /*
+    changePasswordButton.addEventListener('click', (event) => {
             event.preventDefault(); // Voorkom standaard submit van het formulier
 
             const formData = new FormData(passwordForm);
-            const formDataJSON = Object.fromEntries(formData.entries()); // Converteer FormData naar JSON-object
 
-            fetch('/wijzigWachtwoord', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formDataJSON),
-            })
+
+            $.ajax({
+                url: "/wijzigWachtwoord",
+                type: 'POST',
+                data: $(formData).serialize()})
                 .then((response) => {
                     if (response.ok) {
                         return response.json();
@@ -60,6 +77,5 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.error('Fout bij wijzigen wachtwoord:', err);
                     alert('Er ging iets mis. Controleer je invoer en probeer opnieuw.');
                 });
-        });
-    }
-});
+        });*/
+    });
