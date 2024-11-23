@@ -27,9 +27,19 @@ window.onload = function () {
     };
   
     denieButton.onclick = function () {
-      hideCookieBanner();
+      $.ajax({
+        url: '/logout', // De server-side route
+        type: 'POST',
+        contentType: 'application/json',
+        success: function (response) {
+          console.log("Sessie beëindigd:", response);
+          hideCookieBanner();
+        },
+        error: function (xhr, status, error) {
+          console.error("Fout bij het beëindigen van de sessie:", xhr.responseText || error);
+        }
+      });
     };
-  
     // Functies voor cookie handling
     function setCookie(name, value, days) {
       let expires = "";

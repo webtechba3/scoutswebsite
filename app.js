@@ -15,7 +15,7 @@ app.use(session({
   resave: false,
   name: 'SessionID', // Geef de sessie een naam
   saveUninitialized: true,
-  cookie: { secure: false } // Zet op true als je HTTPS gebruikt
+  cookie: { secure: false ,httpOnly: true, sameSite: 'Lax' } // Zet op true als je HTTPS gebruikt
 }));
 // Middleware om sessie-informatie beschikbaar te maken in alle Pug-templates
 app.use((req, res, next) => {
@@ -67,7 +67,20 @@ app.use(function(req, res, next) {
 });
 
 
-
+app.post('/logout', (req, res) => {
+  if (req.session) {
+    req.session.destroy(err => {
+      if (err) {
+        console.error("Fout bij het vernietigen van de sessie:", err);
+        return res.status(500).json({ success: false, message: "Kon sessie niet beëindigen." });
+      }
+      res.clearCookie('SessionID'); // Verwijder de sessie-cookie (gebruik dezelfde naam als in sessieconfiguratie)
+      return res.status(200).json({ success: true, message: "Sessie beëindigd." });
+    });
+  } else {
+    res.status(200).json({ success: true, message: "Geen actieve sessie om te beëindigen." });
+  }
+});
 
 // error handler
 app.use(function(err, req, res, next) {
