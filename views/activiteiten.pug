@@ -3,51 +3,28 @@ extends layout
 block content
     if role === 'leiding'
         h2 Maak een nieuwe activiteit aan 
-        form(action="/activiteiten/postactiviteit" method="POST" id="activiteitForm")
-            div
+        form(action="/activiteiten/postactiviteit" method="post" id="activiteitForm")
+            p
                 label(for="title") Titel
-                p
-                input(type="text" id="title" name="title" required)
+                div
+                    input(type="text" id="title" name="title" required)
 
-            div
+            p
                 label(for="message") Bericht
-                p
-                textarea(id="message" name="message" rows="8" required)
+                div 
+                    textarea(id="message" name="message" rows="8" required)
 
-            div
+            p
                 label(for="target") Doelgroep
-                p
-                select(id="target" name="target" required)
-                    option(value="nietglobaal") Het is geen globaal bericht
-                    option(value="globaal") Globaal bericht
+                div
+                    select(id="target" name="target" required)
+                        option(value="nietglobaal") Het is geen globaal bericht
+                        option(value="globaal") Globaal bericht
 
-            button(type="submit" id="submitActiviteit") Verstuur
+            button(type="submit") Verstuur
 
-        script(src="/javascripts/activiteitfe.js")
-        script.
-            document.addEventListener('DOMContentLoaded', () => {
-            const submitButton = document.getElementById('submitActiviteit');
-            const activiteitForm = document.getElementById('activiteitForm');
-
-            if (submitButton && activiteitForm) {
-                submitButton.addEventListener('click', (event) => {
-                    event.preventDefault(); // Voorkom standaard submit van het formulier
-                    $.ajax({
-                        url: "/postactiviteit",
-                        type: 'POST',
-                        data: $(activiteitForm).serialize(), // Verzamelt alle form-data
-                        success: function(result) {
-                            console.log(result);
-                            // Voer hier acties uit bij succes, zoals een melding weergeven
-                            form.reset(); // Leeg het formulier
-                        },
-                        error: function(err) {
-                            console.error(err);
-                            // Verwerk hier fouten, bijvoorbeeld door een melding weer te geven
-                        }
-                    });
-                });
-            }});
+            script(src="/javascripts/activiteitfe.js")
+        
 
 
     h2 Activiteiten

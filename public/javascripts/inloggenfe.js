@@ -6,7 +6,7 @@ function togglePasswordbol() {
     buttonsubmit.addEventListener('click', () => { // lambda-functie
 
     const form = document.getElementById('inlogForm');
-    if (getCookie("cookie_consent")) {
+    /*if (getCookie("cookie_consent")) {*/
     $.ajax({
     url: "/verzendInlogForm",
     type: 'POST',
@@ -20,11 +20,11 @@ function togglePasswordbol() {
         console.error(err);
         // Verwerk hier fouten, bijvoorbeeld door een melding weer te geven
     }
-    });}
+    });/*}
     else {
         alert("Gelieve eerst de cookies te accepteren");    }
-        
-    });
+
+    });*/
 
 // Functie om cookies te lezen
 function getCookie(name) {
