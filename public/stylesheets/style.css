@@ -346,6 +346,5 @@ footer a:hover {
 #map { 
   height: 300px;
   width: 300px; 
-  justify-content: center;  /* Horizontaal centreren */
-  align-items: center;  
+  align-items : "center";
   }

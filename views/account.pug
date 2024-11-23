@@ -1,52 +1,24 @@
 extends layout
 block content 
     h2 Account
-    section
-        h3 uitloggen 
-        form(action="/logout" method="POST")
-                
-        button(type="button" id="logoutButton") uitloggen
+    section(align ="center") 
+        h3 uitloggen
+        form(action="account/logout" method="post" id = "logoutForm")
+        
+            button(type="submit" id="logoutButton") uitloggen
             
-    section
+    section(align ="center") 
         h3 Wijzig wachtwoord  
-        form(action="/account/wijzigWachtwoord", method="post" id = "veranderwachtwoordform" enctype="application/x-www-form-urlencoded") 
-        p 
-            label(for="password") oud Wachtwoord:
-            div
-                input#password(type="password" name = "oldpassword" required placeholder="Voer uw wachtwoord in")
-        p 
-            label(for="password") nieuw Wachtwoord:
-            div
-                input#password(type="password" name = "newpassword" required  placeholder="Voer uw wachtwoord in")
-        p
-            button(type="submit") verander wachtwoord   
-
-        
-        
-        h4 werkt niet 
-        form(action="/wijzigWachtwoord" method="POST")
-            label(for="oudWachtwoord") Oud wachtwoord
+        form(action="/account/wijzigwachtwoord", method="post" id = "wijzigwachtwoordform") 
             p
-            input(
-            type="password"
-            id="oudWachtwoord"
-            name="oudWachtwoord"
-            required
-           
-            title="Het wachtwoord moet minstens 8 tekens lang zijn."
-            )
+                label(for="password") oud wachtwoord: 
+                div
+                    input(type="password", name="oudwachtwoord" placeholder="Voer uw oud wachtwoord in")
+                    
             p 
-            label(for="nieuwWachtwoord") Nieuw wachtwoord
-            p
-            input(
-                type="password"
-                id="nieuwWachtwoord"
-                name="nieuwWachtwoord"
-                required
-                
-                title="Het wachtwoord moet minstens 8 tekens lang zijn, en minstens één cijfer, één hoofdletter, één kleine letter, en één speciaal teken bevatten."
-                )
-            p     
-            button(type="button" id="changePasswordButton") Wijzig
-                
+                label(for="password") nieuw wachtwoord:
+                div
+                    input(type="password" name = "nieuwwachtwoord" placeholder="Voer uw nieuw wachtwoord in")
+                    
+                button(type="submit") verander  
     script(src="/javascripts/accountfe.js")

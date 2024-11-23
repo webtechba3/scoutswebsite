@@ -29,6 +29,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
         });
     }
+    
+    buttonsubmit.addEventListener('click', () => { // lambda-functie
+
+        const form = document.getElementById('inlogForm');
+        /*if (getCookie("cookie_consent")) {*/
+        $.ajax({
+        url: "/wijzigwachtwoord",
+        type: 'POST',
+        data: $(form).serialize(), // Verzamelt alle form-data
+        success: function(result) {
+            console.log(result);
+            // Voer hier acties uit bij succes, zoals een melding weergeven
+            form.reset(); // Leeg het formulier
+        },
+        error: function(err) {
+            console.error(err);
+            // Verwerk hier fouten, bijvoorbeeld door een melding weer te geven
+        }
+        })/*
     const buttonsubmit = document.querySelector('button[type="submit"]'); 
     buttonsubmit.addEventListener('click', () => { // lambda-functie
 
@@ -49,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         });
         });
-    
+    */
     /*
     changePasswordButton.addEventListener('click', (event) => {
             event.preventDefault(); // Voorkom standaard submit van het formulier

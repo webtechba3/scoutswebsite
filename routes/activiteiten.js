@@ -1,33 +1,6 @@
 let express = require('express');
 let router = express.Router();
-/*
-router.get('/', async (req, res) => {
-    try {
-        const db = req.app.locals; // Verkrijg de collecties
-        const activiteitenCollection = db.activiteitenCollection;
-        const usersCollection = db.usersCollection; // Voeg de users collectie toe
 
-        // Zoek alle activiteiten waarvan de target "globaal" is
-        const globaleActiviteiten = await activiteitenCollection.find({ target: 'globaal' }).toArray();
-
-        // Voeg de naam en voornaam van de auteur toe aan elke activiteit
-        for (let activiteit of globaleActiviteiten) {
-            const user = await usersCollection.findOne({ _id: activiteit.userId }); // Zoek gebruiker op basis van userId
-            if (user) {
-                activiteit.auteur = user.voornaam; // Voeg de auteur toe
-            } else {
-                activiteit.auteur = "Onbekend"; // Als er geen gebruiker is, zet je de auteur als "Onbekend"
-            }
-        }
-
-        // Render de 'activiteiten.pug' met de globale activiteiten
-        res.render('activiteiten', { globaleActiviteiten });
-    } catch (error) {
-        console.error('Fout bij ophalen van activiteiten:', error);
-        res.status(500).send('Er is een fout opgetreden bij het ophalen van de activiteiten.');
-    }
-});
-*/
 router.get('/', async (req, res) => {
     try {
         const db = req.app.locals; // Verkrijg de collecties
