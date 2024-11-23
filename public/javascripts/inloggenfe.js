@@ -25,7 +25,7 @@ function togglePasswordbol() {
         alert("Gelieve eerst de cookies te accepteren");    }
 
     });*/
-
+});
 // Functie om cookies te lezen
 function getCookie(name) {
     const nameEQ = name + "=";
@@ -36,4 +36,4 @@ function getCookie(name) {
         if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
     }
     return null;
-}});
+}
