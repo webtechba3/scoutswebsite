@@ -41,7 +41,9 @@ router.post('/verzendInlogForm', async (req, res) => {
             res.redirect('/'); // Stuur door naar een andere pagina na het instellen van de sessie
           }
         });
-    }}
+    }} else {
+      res.status(401).send("Ongeldige gebruikersnaam of wachtwoord");
+    }
   }
 
   // userCollection is de collection van de gebruikers
