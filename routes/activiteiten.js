@@ -5,35 +5,6 @@ const { ObjectId } = require('mongodb');
 router.get('/', (req, res) => {
     res.render('activiteiten'); // Dit rendert het `activiteiten.pug` bestand in de `views` map
 });
-/*
-router.post('/postactiviteit', async (req, res) => {
-    const { title, message, target } = req.body;
-    const { voornaam, achternaam } = req.session;
-
-    if (!title || !message || !target) {
-        return res.status(400).send('Alle velden zijn verplicht.');
-    }
-
-    try {
-        const activiteit = {
-            title,
-            message,
-            target,
-            voornaam,
-            achternaam,
-            createdAt: new Date()
-        };
-
-        const result = await req.app.locals.activiteitenCollection.insertOne(activiteit);
-        console.log('Activiteit toegevoegd met ID:', result.insertedId);
-        res.redirect('/activiteiten');
-        //res.status(200).json({ message: 'Activiteit succesvol toegevoegd', id: result.insertedId });
-    } catch (error) {
-        console.error('Fout bij het toevoegen van de activiteit:', error);
-        res.status(500).send('Er is een fout opgetreden bij het toevoegen van de activiteit.');
-    }
-});*/
-
 
 router.post('/postactiviteit', async (req, res) => {
     const { title, message, target } = req.body;
