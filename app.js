@@ -6,6 +6,7 @@ const logger = require('morgan');
 const mongoose = require("mongoose"); 
 const session = require('express-session');
 const crypto = require('crypto');
+require('dotenv').config();
 
 const app = express();
 // Sessies configureren
@@ -97,8 +98,7 @@ module.exports = app;
 mongoose.set('strictQuery' ,false);
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://thibautbeckske:kl5wkamcbiJZcATq@webtechba3.kgzjk.mongodb.net/?retryWrites=true&w=majority&appName=webtechba3";
-
+const uri = process.env.MONGO_KEY;
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
