@@ -24,4 +24,7 @@ buttonsubmit.addEventListener('click', () => { // lambda-functie
             }});
             
 });
+function onSubmit(token) {
+    document.getElementById("demo-form").submit();
+  }
 
