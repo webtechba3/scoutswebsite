@@ -20,9 +20,11 @@ router.post('/verzendInlogForm', async (req, res) => {
     // het gewone passwoord moet niet gehashed worden, terwijl user.password wel gehashed is
     console.log(user.psswd , " user.password");
     console.log(password , " password");
-
-    //return await bcrypt.compare( user.psswd , password);
-    if (password == user.psswd){ 
+    const password1 = await bcrypt.hash(password, 10)
+    console.log(password1 , " password1");
+    //if(user.psswd == password1){
+    
+    if( bcrypt.compare(password, user.psswd)){
       console.log("ingelogd")   //Het is nodig om naar req.session te kijken omdat de sessie alle gebruikersspecifieke gegevens bevat die je gedurende de gebruikerssessie wilt bijhouden, zoals of de gebruiker een leiding is, wat hun voornaam en achternaam zijn, of welke tak ze hebben.
       if (req.session) {
         req.session.achternaam = user.naam; // Zorg ervoor dat je username in je database hebt

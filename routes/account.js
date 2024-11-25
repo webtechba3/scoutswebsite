@@ -19,7 +19,8 @@ router.post('/logout',requireLeiding ,(req, res) => {
         delete req.session.voornaam;
         delete req.session.tak;
         delete req.session.achternaam;
-        return res.status(200).send('Sessiegegevens verwijderd.');
+        res.redirect('/inloggen');
+       
     } else {
         console.error('Sessie niet beschikbaar');
         return res.status(400).send('Geen actieve sessie gevonden.');

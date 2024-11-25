@@ -18,8 +18,8 @@ router.post('/voegToe',requireLeiding, async (req, res) => {
     const { naam, voornaam, email, wachtwoord, tak } = req.body;
     // uncomment dit in de echte code
     console.log(naam + " " + voornaam + " " + email + " " + wachtwoord + "voor hahsehn , " + tak+  " tak");
-    //let psswd = await bcrypt.hash(wachtwoord, 10);
-    let psswd = wachtwoord;
+    let psswd = await bcrypt.hash(wachtwoord, 10);
+    //let psswd = wachtwoord;
     console.log(psswd + " na hashen");
     const result = await req.app.locals.usersCollection.insertOne({ naam, voornaam ,email, psswd , tak});
     console.log('Ingevoegd document met ID:', result.insertedId);
