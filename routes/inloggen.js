@@ -8,8 +8,15 @@ router.get('/', function(req, res, next) {
   res.render('inloggen');
 });
 
+function requireCookies(req, res, next) {
+  const cookieConsent = req.cookies.cookie_consent;
+  if (cookieConsent === 'all' || cookieConsent === 'essential') {
+    return next(); // Ga door naar de volgende middleware of route-handler
+  }
+  res.status(403).send('Toegang geweigerd: je moet cookies toestaan om in te loggen.');
+}
 
-router.post('/verzendInlogForm', async (req, res) => {
+router.post('/verzendInlogForm', requireCookies, async (req, res) => {
   console.log('Sessie:', req.session);
   const { email, password } = req.body;
   try{

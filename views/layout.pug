@@ -21,8 +21,10 @@ html
      script(src="https://www.google.com/recaptcha/api.js")
   body
     include navbar.pug
+    include cookie.pug
     main
       block content
+    
     include footer.pug
 
     script(src="/javascripts/navbar.js")
