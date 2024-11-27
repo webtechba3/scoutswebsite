@@ -4,39 +4,57 @@ const router = express.Router();
 
 // Array van takken
 const takken = ['kapoenen', 'welpen', 'roeland', 'parcival', 'givers', 'jin'];
-
-// Voeg routes toe voor elke tak
-takken.forEach(tak => {
+const path = require('path');
+/*takken.forEach(tak => {
+    router.get(`/${tak}`, (req, res) => {
+      // Geef expliciet het pad naar de juiste submap bij het renderen
+      const takViewPath = path.join(__dirname, '../views/tak', tak);
+      res.render(takViewPath, { title: `Welkom bij de ${tak}` });
+    });
+  });
+  
+ */
+  takken.forEach(tak => {
     router.get(`/${tak}`, async (req, res) => {
-        // Controleer of het accessToken beschikbaar is in de sessie
-        const accessToken = req.session?.accessToken || null;
-
-        if (!accessToken) {
-            console.warn(`Geen toegangstoken gevonden voor ${tak}. Doorsturen naar login.`);
-            return res.redirect('/spotify/spotify-login'); // Stuur naar Spotify login als er geen token is
-        }
-
         try {
-            // Haal de afspeellijstgegevens op voor de `givers` pagina
-            const playlistResponse = await axios.get(`https://api.spotify.com/v1/playlists/${process.env.PLAYLIST_ID}`, {
-                headers: { Authorization: `Bearer ${accessToken}` },
-            });
+            const db = req.app.locals; // Verkrijg de collecties
+            const activiteitenCollection = db.activiteitenCollection;
+            const usersCollection = db.usersCollection; // Voeg de users collectie toe
+            const linkuseractiviteit = db.linkuseractiviteit; // Voeg de linkuseractiviteit collectie toe
 
-            const playlist = playlistResponse.data;
+            // Zoek alle activiteiten waarvan de target niet "globaal" is
+            activiteiten = [];
+            const relaties = await linkuseractiviteit.find({ target: 'nietglobaal' }).toArray();
 
-            // Render de juiste Pug-template met de accessToken en afspeellijst
-            res.render(`tak/${tak}`, { 
-                title: `Welkom bij ${tak}`,
-                tak: tak,
-                accessToken: accessToken, // Geef het accessToken door
-                playlist: playlist, // Voeg de afspeellijstgegevens toe
+            if (!relaties.length) {
+                return res.status(404).send('Geen activiteiten gevonden.');
+            }
+
+            // Haal de gebruiker op, bijv. via sessie
+            const user = await usersCollection.findOne({ id: nietGlobaleActiviteiten.userId });
+            if (!user) {
+                return res.status(404).send('user niet gevonden');
+            }
+
+            // tot hier werkt het al 
+            // Filter de activiteiten voor de juiste tak van de gebruiker
+            for (let relatie of relaties) {
+            const nietGlobaleActiviteiten = await activiteitenCollection.find({id : activiteit.activiteitId});
+            const filteredActiviteiten = nietGlobaleActiviteiten.filter(activiteit => {
+                return activiteit.target.toLowerCase() === tak.toLowerCase() && user.tak.toLowerCase() === tak.toLowerCase();
             });
+            activiteiten.push(filteredActiviteiten);
+            
+            } 
+            // Geef het pad naar de juiste submap voor de betreffende tak
+            const takViewPath = path.join(__dirname, '../views/tak', tak);
+            res.render(takViewPath, { title: `Welkom bij de ${tak}`, activiteiten: activiteiten });
         } catch (error) {
-            console.error('Fout bij ophalen afspeellijst:', error.response?.data || error.message);
-            res.status(500).send('Kan de afspeellijst niet ophalen.');
+            console.error('Fout bij het ophalen van activiteiten:', error);
+            res.status(500).send('Er is een fout opgetreden bij het ophalen van de activiteiten.');
+
         }
     });
 });
 
-// Exporteer de router
 module.exports = router;

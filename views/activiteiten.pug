@@ -2,57 +2,51 @@ extends layout
 
 block content
     if role === 'leiding'
-        h2 Maak een nieuwe activiteit aan 
-        form(action="/activiteiten/postactiviteit" method="POST" id="activiteitForm")
-            div
+        h2(align ="center") Maak een nieuwe activiteit aan 
+        form(action="/activiteiten/postactiviteit" method="post" id="activiteitForm")
+            p
                 label(for="title") Titel
-                p
-                input(type="text" id="title" name="title" required)
+                div
+                    input(type="text" id="title" name="title" required)
 
-            div
+            p
                 label(for="message") Bericht
-                p
-                textarea(id="message" name="message" rows="8" required)
+                div 
+                    textarea(id="message" name="message" rows="8" required)
 
-            div
+            p
                 label(for="target") Doelgroep
-                p
-                select(id="target" name="target" required)
-                    option(value="nietglobaal") Het is geen globaal bericht
-                    option(value="globaal") Globaal bericht
+                div
+                    select(id="target" name="target" required)
+                        option(value="nietglobaal") Het is geen globaal bericht
+                        option(value="globaal") Globaal bericht
 
-            button(type="submit" id="submitActiviteit") Verstuur
+            button(type="submit") Verstuur
 
-        script(src="/javascripts/activiteitfe.js")
-        script.
-            document.addEventListener('DOMContentLoaded', () => {
-            const submitButton = document.getElementById('submitActiviteit');
-            const activiteitForm = document.getElementById('activiteitForm');
+            script(src="/javascripts/activiteitfe.js")
+        
 
-            if (submitButton && activiteitForm) {
-                submitButton.addEventListener('click', (event) => {
-                    event.preventDefault(); // Voorkom standaard submit van het formulier
-                    $.ajax({
-                        url: "/postactiviteit",
-                        type: 'POST',
-                        data: $(activiteitForm).serialize(), // Verzamelt alle form-data
-                        success: function(result) {
-                            console.log(result);
-                            // Voer hier acties uit bij succes, zoals een melding weergeven
-                            form.reset(); // Leeg het formulier
-                        },
-                        error: function(err) {
-                            console.error(err);
-                            // Verwerk hier fouten, bijvoorbeeld door een melding weer te geven
-                        }
-                    });
-                });
-            }});
-
-
-    h2 Activiteiten
-    p hier moeten de globale activiteiten komen 
-    section 
-        h3 Agenda 
-        p 
-        iframe(src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Europe%2FBrussels&showPrint=0&src=dGhpYmF1dC5iZWNrc2tlQGdtYWlsLmNvbQ&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=Y2RkYTI4NTg1OWM5YWNkZDJmN2FlYTUxYTFkM2ZhMDZhMTkyNjRmMjBhYjFmZDdmOGVlNDQ4MjE3NjcxNzUzZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=bmwuYmUjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%237986CB&color=%2333B679&color=%23D81B60&color=%230B8043" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no")
+    div(align = "center")
+        h2 Activiteiten
+        
+        if globaleActiviteiten && globaleActiviteiten.length > 0
+            table(border="1", cellpadding="5", cellspacing="0")
+                thead
+                    tr
+                        th Titel
+                        th Bericht
+                        th Auteur
+                        th Datum
+                tbody
+                    each activiteit in globaleActiviteiten
+                        tr
+                            td= activiteit.title
+                            td= activiteit.message
+                            td= activiteit.auteur  
+                            td= activiteit.createdAt.toLocaleString()
+        else
+            p Er zijn geen globale activiteiten beschikbaar.
+        section 
+            h3 Agenda 
+            p 
+            iframe(src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Europe%2FBrussels&showPrint=0&src=dGhpYmF1dC5iZWNrc2tlQGdtYWlsLmNvbQ&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=Y2RkYTI4NTg1OWM5YWNkZDJmN2FlYTUxYTFkM2ZhMDZhMTkyNjRmMjBhYjFmZDdmOGVlNDQ4MjE3NjcxNzUzZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=bmwuYmUjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%237986CB&color=%2333B679&color=%23D81B60&color=%230B8043" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no")

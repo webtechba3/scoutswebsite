@@ -1,11 +1,17 @@
 /* Algemene Body Stijl */
-body {
-  padding-top: 70xp;
+html,body {
+
+ 
+  height: 100%; /* Vul de gehele viewport-hoogte */
   margin: 0;
   font-family: "Lora", serif;
   background-color: #CABA9C; /* Donkergroen achtergrondkleur */
   color: #4D2D18; /* Khaki als standaard tekstkleur */
+  display: flex;
+  flex-direction: column; /* Kolomlayout: header, content, footer */
+
 }
+
 
 /* Links */
 a {
@@ -27,6 +33,7 @@ header {
   top: 0;
   width: 100%;
   z-index: 1000;
+  
   height: auto;
   box-sizing: border-box;
   transition: padding 0.3s ease, background-color 0.3s ease; /* Animatie toevoegen */
@@ -40,6 +47,9 @@ header.scrolled {
 
 .main-content {
   margin-top: 70px; /* De hoogte van de navbar */
+  flex: 1; /* Neemt resterende ruimte in */
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -51,43 +61,57 @@ header.scrolled {
   height: 40px;
 }
 
-.nav-links {
-  list-style-type: none;
+.navbar {
   display: flex;
-  gap: 20px;
-  margin: 0;
-  padding: 0;
-  margin-left: auto; /* Zorgt voor uitlijning naar rechts */
-  text-align: right;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #4C6444; /* Hunter green */
+  color: #CABA9C;
+  position: relative;
+  z-index: 1000;
 }
 
-.nav-links li a {
+.navbar h1 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  flex-wrap: wrap; /* Laat links naar een nieuwe regel springen indien nodig */
+  justify-content: center;  /*Centreren van navigatielinks */
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
   color: #CABA9C;
+  text-decoration: none;
   font-weight: 500;
   padding: 10px 15px;
   transition: color 0.3s ease;
 }
 
-.nav-links li a:hover {
+.nav-links a:hover {
   color: #8A6240;
 }
 
-.navbar {
-  display: flex;
-  position: relative; /* Belangrijk voor de positie van .dropdown */
-  align-items: baseline;
-}
-
-/* Dropdown-menu */
 .dropdown {
-  display: none; /* Verberg standaard */
+  display: none;
   position: absolute;
-  background-color: #4C6444; /* Hunter green */
-  padding: 10px 0;
+  background-color: #4C6444;
   list-style: none;
   margin: 0;
+  padding: 10px 0;
   z-index: 500;
-  min-width: 100px; /* Minimale breedte van het menu */
+  min-width: 150px;
 }
 
 .dropdown li {
@@ -97,20 +121,67 @@ header.scrolled {
 .dropdown li a {
   color: #CABA9C;
   text-decoration: none;
-  display: block;
-  transition: background-color 0.3s ease;
 }
 
 .dropdown li a:hover {
   color: #8A6240;
-  background-color: rgba(255, 255, 255, 0.1); /* Licht transparante achtergrond bij hover */
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Dropdown tonen bij hover */
+/* Toon dropdown bij hover */
 .nav-links li:hover .dropdown {
-  display: block; /* Toon het menu bij hover */
+  display: block;
 }
 
+/* Mobiel menu */
+.menu-btn {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #CABA9C;
+  cursor: pointer;
+}
+
+.mobile-nav {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* Volledige breedte */
+  max-width: 100vw; /* Houd het menu binnen de viewport */
+  height: 100vh;
+  background-color: #4C6444;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.mobile-nav.open {
+  transform: translateX(0);
+}
+
+.mobile-nav a {
+  color: #CABA9C;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.mobile-nav a:hover {
+  color: #8A6240;
+}
+
+.mobile-nav .close-btn {
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #CABA9C;
+  cursor: pointer;
+  margin-bottom: 20px;
+  text-align: left;
+}
 /* Takken Container */
 .takken-container {
   display: grid; /* Gebruik grid voor flexibele layout */
@@ -301,12 +372,16 @@ form button:hover {
 footer {
   background-color: #102820;
   color: #CABA9C;
-  padding: 20px;
+  margin-top : 250px;
+  padding: 40px;
+  padding-bottom: 70px;
+  
   text-align: center;
 }
 
 footer a {
   color: #CABA9C;
+  text-decoration: none;
 }
 
 footer a:hover {
@@ -341,10 +416,38 @@ footer a:hover {
   .parallax, .parallax-next {
     background-attachment: scroll;
   }
+  .av-links {
+    display: none;
+  }
+
+  .menu-btn {
+    display: block;
+  }
 }
 
 #map { 
-  height: 300px;
-  width: 300px; 
-  
+  height: 450px;
+  width: 100%; 
+  align-items : "center";
+  } 
+#cookie-banner{ 
+  position: fixed; 
+  bottom: -15px; 
+  left: 10%; 
+  width: 80%; 
+  background: #4C6444; 
+  color: #CABA9C; 
+  padding: 10px 50px; 
+  padding-bottom: 75px;                       
+  text-align: center; 
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); 
+  border-radius: 15px;
+  z-index: 1000; 
+  button {
+     background-color: #4D2D18;
+    margin: 3px;
   }
+  button:hover {
+    background-color: #181a18;
+  }
+}

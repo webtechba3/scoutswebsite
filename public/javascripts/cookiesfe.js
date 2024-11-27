@@ -12,8 +12,8 @@ window.onload = function () {
         // Verberg de cookie banner:
         cookieBanner.style.display = "none";
       }
+      //cookieBanner.style.display = "block";
     
-  
     acceptAllButton.onclick = function () {
       setCookie("cookie_consent", "all", 365);
       applyCookieSettings("all");

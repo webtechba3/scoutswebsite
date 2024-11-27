@@ -19,7 +19,8 @@ router.post('/logout',requireLeiding ,(req, res) => {
         delete req.session.voornaam;
         delete req.session.tak;
         delete req.session.achternaam;
-        return res.status(200).send('Sessiegegevens verwijderd.');
+        res.redirect('/inloggen');
+       
     } else {
         console.error('Sessie niet beschikbaar');
         return res.status(400).send('Geen actieve sessie gevonden.');
@@ -32,7 +33,7 @@ router.post('/wijzigWachtwoord',requireLeiding,  async (req, res) => {
     if (req.session) {
         console.log('Wachtwoord wijzigen:', req.session.voornaam);
         console.log('Nieuw wachtwoord:', req.body.wachtwoord);
-        const user = await req.app.locals.usersCollection.findOne({ voornaam :req.session.voornaam, achternaam: req.session.achternaam },{});
+        const user = await req.app.locals.usersCollection.findOne({ voornaam :req.session.voornaam});
         if (user) {
      
             // Vergelijk het ingevoerde wachtwoord met het gehashte wachtwoord uit de database
@@ -40,11 +41,11 @@ router.post('/wijzigWachtwoord',requireLeiding,  async (req, res) => {
             console.log(user.psswd , " user.password");
             console.log(oudwachtwoord , " password");
         
-            //return await bcrypt.compare( user.psswd , password);
+            
             if (oudwachtwoord== user.psswd){ 
                 await req.app.locals.usersCollection.updateOne(
                     { _id: user._id }, // Zoek de gebruiker op basis van hun ID
-                    { $set: { psswd: hashedNieuwWachtwoord } } // Zet het nieuwe gehashte wachtwoord
+                    { $set: { psswd: nieuwwachtwoord} } // Zet het nieuwe gehashte wachtwoord
                 );
                 console.log('Wachtwoord gewijzigd voor:', req.session.voornaam);
                 return res.status(200).json({ message: 'Wachtwoord gewijzigd.' });

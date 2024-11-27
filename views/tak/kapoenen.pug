@@ -3,3 +3,12 @@ extends ../layout.pug
 block content
   h1= title
   p Welkom bij de Kapoenen!
+  if activiteiten.length
+    ul
+      each activiteit in activiteiten
+        li
+          h3= activiteit.titel
+          p Auteur: #{activiteit.auteur || 'Onbekend'}
+          p= activiteit.omschrijving || 'Geen omschrijving beschikbaar.'
+  else
+    p Geen activiteiten gevonden.

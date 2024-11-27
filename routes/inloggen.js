@@ -8,8 +8,15 @@ router.get('/', function(req, res, next) {
   res.render('inloggen');
 });
 
+function requireCookies(req, res, next) {
+  const cookieConsent = req.cookies.cookie_consent;
+  if (cookieConsent === 'all' || cookieConsent === 'essential') {
+    return next(); // Ga door naar de volgende middleware of route-handler
+  }
+  res.status(403).send('Toegang geweigerd: je moet cookies toestaan om in te loggen.');
+}
 
-router.post('/verzendInlogForm', async (req, res) => {
+router.post('/verzendInlogForm', requireCookies, async (req, res) => {
   console.log('Sessie:', req.session);
   const { email, password } = req.body;
   try{
@@ -20,9 +27,11 @@ router.post('/verzendInlogForm', async (req, res) => {
     // het gewone passwoord moet niet gehashed worden, terwijl user.password wel gehashed is
     console.log(user.psswd , " user.password");
     console.log(password , " password");
-
-    //return await bcrypt.compare( user.psswd , password);
-    if (password == user.psswd){ 
+    const password1 = await bcrypt.hash(password, 10)
+    console.log(password1 , " password1");
+    //if(user.psswd == password1){
+    
+    if( bcrypt.compare(password, user.psswd)){
       console.log("ingelogd")   //Het is nodig om naar req.session te kijken omdat de sessie alle gebruikersspecifieke gegevens bevat die je gedurende de gebruikerssessie wilt bijhouden, zoals of de gebruiker een leiding is, wat hun voornaam en achternaam zijn, of welke tak ze hebben.
       if (req.session) {
         req.session.achternaam = user.naam; // Zorg ervoor dat je username in je database hebt
@@ -41,7 +50,9 @@ router.post('/verzendInlogForm', async (req, res) => {
             res.redirect('/'); // Stuur door naar een andere pagina na het instellen van de sessie
           }
         });
-    }}
+    }} else {
+      res.status(401).send("Ongeldige gebruikersnaam of wachtwoord");
+    }
   }
 
   // userCollection is de collection van de gebruikers
