@@ -1,6 +1,7 @@
 /* Algemene Body Stijl */
 html,body {
-  padding-top: 70xp;
+
+ 
   height: 100%; /* Vul de gehele viewport-hoogte */
   margin: 0;
   font-family: "Lora", serif;
@@ -371,7 +372,10 @@ form button:hover {
 footer {
   background-color: #102820;
   color: #CABA9C;
-  padding: 20px;
+  margin-top : 250px;
+  padding: 40px;
+  padding-bottom: 70px;
+  
   text-align: center;
 }
 
@@ -426,3 +430,24 @@ footer a:hover {
   width: 100%; 
   align-items : "center";
   } 
+#cookie-banner{ 
+  position: fixed; 
+  bottom: -15px; 
+  left: 10%; 
+  width: 80%; 
+  background: #4C6444; 
+  color: #CABA9C; 
+  padding: 10px 50px; 
+  padding-bottom: 75px;                       
+  text-align: center; 
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); 
+  border-radius: 15px;
+  z-index: 1000; 
+  button {
+     background-color: #4D2D18;
+    margin: 3px;
+  }
+  button:hover {
+    background-color: #181a18;
+  }
+}
