@@ -1,0 +1,22 @@
+extends ../layout.pug
+
+block content
+  h1 #{title}
+
+  if !accessToken
+    p Geen toegangstoken gevonden.
+    a.link-primary(href='/spotify/spotify-login') Login met Spotify om nummers toe te voegen
+  else
+    h2 Afspeellijst: #{playlist.name}
+    ul#playlist
+      each track in playlist.tracks.items
+        li #{track.track.name} - #{track.track.artists[0].name}
+
+    h3 Voeg een nummer toe
+    form(action="/spotify/search", method="POST")
+      input(type="text", name="query", placeholder="Zoek naar een nummer of artiest")
+      button(type="submit") Zoek
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/51m5cuV7pH7xMNeMvWYmrQ?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    ul#results
+
+  script(src="/javascripts/tak/giversfe.js")
