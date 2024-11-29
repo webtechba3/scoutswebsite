@@ -1,36 +1,65 @@
 extends layout
 
-    
 block content
-  .parallax(id="home")
+  // Parallax met afbeelding
+  .parallax-foto1
     .hero-content
       .transparent-box
         h1.transparent-text Scouting Ieper
 
+  // Sectie over ons
   .section#about
     h2 Over Ons
     p Wij organiseren avontuurlijke activiteiten voor jongeren.
     h3 Hier kan je ons vinden.
     div 
-      
     div#map
-       script.
-          var map = L.map('map').setView([50.848321, 2.884721], 13);
-          var marker = L.marker([50.848321, 2.884721]).addTo(map);
-          L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 19,
-          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          }).addTo(map);
+      script.
+        var map = L.map('map').setView([50.848321, 2.884721], 13);
+        var marker = L.marker([50.848321, 2.884721]).addTo(map);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
 
+    h1 Weerinformatie
+    div#weather
+        script.
+                      // API-url met jouw gewenste parameters
+            const apiUrl = "https://api.open-meteo.com/v1/forecast?latitude=50.8511&longitude=2.8857&current=temperature_2m,apparent_temperature,is_day,rain,showers,snowfall&hourly=temperature_2m,precipitation,rain,showers,snowfall,snow_depth,cloud_cover,cloud_cover_low,cloud_cover_mid,cloud_cover_high,visibility&daily=weather_code&timezone=auto&forecast_days=3";
+
+            // Selecteer de plek op de pagina waar de data komt
+            const weatherDiv = document.getElementById("weather");
+
+            // Haal de data op van de API
+            fetch(apiUrl)
+              .then(response => {
+                if (!response.ok) throw new Error("Probleem met ophalen van gegevens");
+                return response.json();
+              })
+              .then(data => {
+                // Verwerk en toon de data
+                const dailyWeather = data.daily.weather_code; // voorbeeld: dagelijkse weergegevens
+                weatherDiv.innerHTML = `<p>Dagelijkse weersvoorspelling: ${dailyWeather.join(", ")}</p>`;
+              })
+              .catch(error => {
+                // Toon een foutmelding
+                weatherDiv.innerHTML = `<p>Error: ${error.message}</p>`;
+              });
     //iframe(src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.070396562593!2d2.8820092761499034!3d50.848380658633026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47dcce542618916d%3A0xff4929536d02c3!2sScouts%20Ieper!5e0!3m2!1snl!2sbe!4v1731936588512!5m2!1snl!2sbe"
      width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade")
-  .parallax-next
-    .hero-content
-      
 
+  // Parallax met video
+  .parallax#video
+    video(autoplay muted loop playsinline)
+      source(src="/video/inDeBeek.mov" type="video/mp4")
+    .hero-content
+      .transparent-box
+        h1.transparent-text Avonturen in Beeld
+        p Bekijk hoe wij plezier maken
+
+  // Sectie contact
   .section#contact
-    
-    
     h2 Contacteer Ons
     if role === 'leiding'
       table
@@ -40,10 +69,9 @@ block content
             th E-mail
             th Bericht
         tbody
-          // Check of de 'contacten' array leeg is
           if contacten.length === 0
             tr
-              td colspan="3" Geen contactberichten gevonden.
+              td(colspan="3") Geen contactberichten gevonden.
           else
             each contact in contacten
               tr
@@ -68,5 +96,5 @@ block content
             data-sitekey="6LcolYgqAAAAACCt2uS9x8kTXSApmtrabmOHTLcF" 
             data-callback="onSubmit" 
             data-action="submit") Verstuur
-        sctipt(src="/javascripts/indexfe.js")
-        
+        script(src="/javascripts/indexfe.js")
+

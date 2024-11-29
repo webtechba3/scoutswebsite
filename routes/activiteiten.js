@@ -7,6 +7,14 @@ router.get('/', async (req, res) => {
         const activiteitenCollection = db.activiteitenCollection;
         const usersCollection = db.usersCollection; // Voeg de users collectie toe
         const linkuseractiviteit = db.linkuseractiviteit; // Voeg de linkuseractiviteit collectie toe
+        console.log('activiteitenCollection', activiteitenCollection);
+        
+        // Voeg dit toe om 'now' te definiëren
+        const now = new Date();
+        
+        // Verwijder verlopen activiteiten
+        const result = await activiteitenCollection.deleteMany({ expiryDate: { $lt: now } });
+        console.log(`${result.deletedCount} verlopen activiteiten verwijderd.`);
 
         // Zoek alle activiteiten waarvan de target "globaal" is
         const globaleActiviteiten = await activiteitenCollection.find({ target: 'globaal' }).toArray();
@@ -39,7 +47,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/postactiviteit', async (req, res) => {
-    const { title, message, target } = req.body;
+    const { title, message, target, expiryDate } = req.body;
     
 
     if (!title || !message || !target) {
@@ -64,7 +72,8 @@ router.post('/postactiviteit', async (req, res) => {
             title,
             message,
             target,
-            createdAt: new Date()
+            createdAt: new Date(),
+            expiryDate: expiryDate ? new Date(expiryDate) : null //standaard null als geen datum wordt meegegeven
         };
 
         const activiteitResult = await activiteitenCollection.insertOne(activiteit);

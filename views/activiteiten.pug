@@ -2,7 +2,7 @@ extends layout
 
 block content
     if role === 'leiding'
-        h2(align ="center") Maak een nieuwe activiteit aan 
+        h2(align="center") Maak een nieuwe activiteit aan 
         form(action="/activiteiten/postactiviteit" method="post" id="activiteitForm")
             p
                 label(for="title") Titel
@@ -13,6 +13,11 @@ block content
                 label(for="message") Bericht
                 div 
                     textarea(id="message" name="message" rows="8" required)
+
+            p
+                label(for="expiryDate") Vervaldatum
+                div
+                    input(type="date" id="expiryDate" name="expiryDate" required)
 
             p
                 label(for="target") Doelgroep
@@ -26,7 +31,7 @@ block content
             script(src="/javascripts/activiteitfe.js")
         
 
-    div(align = "center")
+    div.table-container(align = "center")
         h2 Activiteiten
         
         if globaleActiviteiten && globaleActiviteiten.length > 0
@@ -37,13 +42,15 @@ block content
                         th Bericht
                         th Auteur
                         th Datum
+                        th Vervaldatum
                 tbody
                     each activiteit in globaleActiviteiten
                         tr
                             td= activiteit.title
                             td= activiteit.message
                             td= activiteit.auteur  
-                            td= activiteit.createdAt.toLocaleString()
+                            td= new Date(activiteit.createdAt).toLocaleString()
+                            td= activiteit.expiryDate ? new Date(activiteit.expiryDate).toLocaleString() : 'Geen vervaldatum'
         else
             p Er zijn geen globale activiteiten beschikbaar.
         section 

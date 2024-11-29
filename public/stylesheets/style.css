@@ -23,33 +23,33 @@ a:hover {
   color: #8A6240; /* Raw Umber kleur */
 }
 
-/* Navigatiebalk */
+/* Algemene stijlen voor de navigatiebalk */
 header {
   background-color: #4C6444; /* Hunter green */
-  padding: 15px 20px; /* Standaard padding */
-  display: flex;
-  align-items: center;
-  position: sticky; /* Zorgt dat de navbar blijft hangen */
+  padding: 0; /* Geen extra padding in de header zelf */
+  position: sticky; /* Zorgt dat de header blijft hangen */
   top: 0;
-  width: 100%;
+  width: 100%; /* Header vult altijd de volledige breedte */
   z-index: 1000;
-  
-  height: auto;
   box-sizing: border-box;
-  transition: padding 0.3s ease, background-color 0.3s ease; /* Animatie toevoegen */
+  transition: padding 0.3s ease, background-color 0.3s ease;
 }
 
 header.scrolled {
-  padding: 10px 20px; /* Verkleinde padding bij scrollen */
   background-color: #3A5233; /* Donkere kleur bij scrollen */
 }
 
-
-.main-content {
-  margin-top: 70px; /* De hoogte van de navbar */
-  flex: 1; /* Neemt resterende ruimte in */
+/* Navbar container */
+.navbar {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; /* Verdeel de logo en links */
+  padding: 15px 20px;
+  width: 100%; /* Zorg dat de navbar de volledige breedte van de header inneemt */
+  background-color: inherit; /* Gebruik dezelfde achtergrondkleur als de header */
+  color: #CABA9C;
+  position: relative;
+  box-sizing: border-box; /* Houd padding binnen de breedte */
 }
 
 
@@ -61,34 +61,13 @@ header.scrolled {
   height: 40px;
 }
 
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
-  background-color: #4C6444; /* Hunter green */
-  color: #CABA9C;
-  position: relative;
-  z-index: 1000;
-}
-
-.navbar h1 {
-  font-size: 20px;
-  margin: 0;
-}
-
+/* Navigatielinks */
 .nav-links {
-  display: flex;
+  display: flex; /* Standaard zichtbaar op grotere schermen */
   gap: 20px;
   list-style: none;
-  flex-wrap: wrap; /* Laat links naar een nieuwe regel springen indien nodig */
-  justify-content: center;  /*Centreren van navigatielinks */
   margin: 0;
   padding: 0;
-}
-
-.nav-links li {
-  position: relative;
 }
 
 .nav-links a {
@@ -103,6 +82,7 @@ header.scrolled {
   color: #8A6240;
 }
 
+/* Dropdown submenu */
 .dropdown {
   display: none;
   position: absolute;
@@ -120,7 +100,6 @@ header.scrolled {
 
 .dropdown li a {
   color: #CABA9C;
-  text-decoration: none;
 }
 
 .dropdown li a:hover {
@@ -133,86 +112,122 @@ header.scrolled {
   display: block;
 }
 
-/* Mobiel menu */
-.menu-btn {
-  display: none;
-  font-size: 24px;
-  background: none;
-  border: none;
-  color: #CABA9C;
-  cursor: pointer;
+/* Mobiele weergave */
+@media (max-width: 918px) {
+  .nav-links {
+    display: none; /* Verberg standaard de links */
+    flex-direction: column; /* Maak de links verticaal */
+    position: absolute; /* Positie van de dropdown */
+    top: 50px; /* Direct onder de navbar */
+    right: 20px; /* Rechts uitgelijnd */
+    background-color: #4C6444; /* Achtergrondkleur */
+    padding: 10px;
+    gap: 10px; /* Afstand tussen de links */
+    border-radius: 5px; /* Ronde hoeken */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Schaduw */
+    z-index: 1000;
+  }
+
+  .nav-links.mobile-nav {
+    display: flex; /* Maak zichtbaar bij toggle */
+  }
+
+  .menu-btn {
+    display: block; /* Toon de hamburger */
+    margin-left: auto;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #CABA9C;
+    margin-left: auto;
+  }
+
+  .menu-btn.open .fa-bars {
+    display: none; /* Verberg de hamburger als menu open is */
+  }
+
+  .menu-btn.open::before {
+    content: "\f00d"; /* FontAwesome code voor 'sluiten' */
+    font-family: FontAwesome;
+    font-size: 24px;
+    color: #CABA9C;
+  }
 }
 
-.mobile-nav {
-  display: none;
-  flex-direction: column;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%; /* Volledige breedte */
-  max-width: 100vw; /* Houd het menu binnen de viewport */
-  height: 100vh;
-  background-color: #4C6444;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease-in-out;
+/* Voor schermen groter dan 918px */
+@media (min-width: 918px) {
+  .menu-btn {
+    display: none; /* Verberg de hamburger */
+  }
+
+  .nav-links {
+    display: flex; /* Toon de links horizontaal */
+    flex-direction: row;
+    position: static; /* Herstel standaard positie */
+    background-color: transparent; /* Geen achtergrondkleur */
+    padding: 0;
+    gap: 20px;
+    box-shadow: none;
+  }
 }
 
-.mobile-nav.open {
-  transform: translateX(0);
-}
 
-.mobile-nav a {
-  color: #CABA9C;
-  text-decoration: none;
-  margin-bottom: 10px;
-}
 
-.mobile-nav a:hover {
-  color: #8A6240;
-}
-
-.mobile-nav .close-btn {
-  font-size: 24px;
-  background: none;
-  border: none;
-  color: #CABA9C;
-  cursor: pointer;
-  margin-bottom: 20px;
-  text-align: left;
-}
 /* Takken Container */
 .takken-container {
-  display: grid; /* Gebruik grid voor flexibele layout */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Dynamisch aantal kolommen */
-  gap: 20px; /* Ruimte tussen de items */
-  justify-content: center; /* Items centreren */
-  padding: 20px; /* Ruimte rondom de container */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Altijd maximaal 3 kolommen */
+  gap: 20px; /* Ruimte tussen items */
+  justify-content: space-evenly; /* Verdeel items gelijkmatig, incl. buitenmarges */
+  padding: 20px;
 }
 
 .tak {
+  position: relative; /* Relatief voor positionering van het kleine pictogram */
   text-align: center;
 }
 
 .tak a {
   text-decoration: none;
   color: inherit;
+  position: relative; /* Zorg ervoor dat de link de positionering beheert */
 }
 
 .tak-image {
-  width: 100%; /* Laat de afbeelding groter worden */
-  max-width: 300px; /* Limiteer de breedte voor consistentie */
-  height: auto;
-  border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 300px; /* Beperk breedte tot consistentie */
+  height: auto; /* Behoud aspectratio */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover-effecten */
 }
 
-.tak-image:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.tak a:hover .tak-image {
+  transform: scale(1.05); /* Vergroten bij hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Schaduw bij hover */
 }
 
+/* Kleine afbeelding rechtsonder */
+.tak-small-icon {
+  position: absolute;
+  bottom: 10px; /* Plaats het pictogram 10px vanaf de onderkant */
+  right: 10px; /* Plaats het pictogram 10px vanaf de rechterkant */
+  width: 70px; /* Maak het pictogram klein */
+  height: 70px; /* Maak de hoogte ook consistent */
+  overflow: hidden; /* Zorg dat de afbeelding niet buiten de container gaat */
+}
+
+.tak-small-icon img {
+  width: 100%; /* Pas de afbeelding aan de breedte van de container aan */
+  height: 100%; /* Pas de afbeelding aan de hoogte van de container aan */
+  object-fit: contain; /* Zorg ervoor dat de hele afbeelding zichtbaar is */
+  transition: transform 0.3s ease; /* Hover-transitie */
+}
+
+.tak a:hover .tak-small-icon img {
+  transform: scale(1.05); /* Vergroot mee met de grote afbeelding */
+}
+
+/* Tekst onder afbeelding */
 .tak-name {
   display: block;
   margin-top: 10px;
@@ -221,18 +236,68 @@ header.scrolled {
   color: #4D2D18; /* Café Noir */
 }
 
-/* Specifieke stijl voor laatste rij als er maar 1 foto staat */
-.tak:last-child {
-  grid-column: 1 / -1; /* Laat deze foto over de hele rij gaan */
-  justify-self: center; /* Centreer deze foto */
+/* Responsieve aanpassing voor kleinere schermen */
+@media (max-width: 768px) {
+  .takken-container {
+    grid-template-columns: repeat(2, 1fr); /* Maximaal 2 kolommen op kleine schermen */
+    gap: 15px; /* Iets kleinere ruimte tussen items */
+  }
+
+  .tak-small-icon {
+    width: 50px; /* Maak het pictogram kleiner op mobiele apparaten */
+    height: 50px;
+  }
 }
+
+@media (max-width: 480px) {
+  .takken-container {
+    grid-template-columns: 1fr; /* Eén kolom op zeer kleine schermen */
+    justify-content: center; /* Centreer items */
+  }
+
+  .tak-small-icon {
+    width: 40px; /* Nog kleiner pictogram op zeer kleine schermen */
+    height: 40px;
+  }
+}
+
+
+
+
+
+
+.table-container {
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 90%;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-container th, .table-container td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #102820;
+}
+
+.table-container th {
+  background-color: #f4f4f4;
+}
+
 
 header.scrolled {
   padding: 10px 20px;
 }
 
 /* Parallax Secties */
-.parallax, .parallax-next {
+.parallax-foto1, .parallax-foto2, .parallax-video {
   position: relative;
   background-size: cover;
   background-position: center;
@@ -241,13 +306,27 @@ header.scrolled {
   height: 100vh;
 }
 
-.parallax {
+.parallax video {
+  position: absolute; /* Absolute positionering om te centreren */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Precisie-centrering */
+  min-width: 100%; /* Zorg dat de video de breedte van de container vult */
+  min-height: 100%; /* Zorg dat de video de hoogte van de container vult */
+  width: auto; /* Schaal proportioneel */
+  height: auto; /* Schaal proportioneel */
+  object-fit: cover; /* Vul de container zonder de video te vervormen */
+  z-index: -1; /* Zorg dat de video achter de overlay-inhoud zit */
+}
+
+.parallax-foto1 {
   background-image: url('/images/Groepsfoto2024.jpg'); /* Eerste afbeelding */
 }
 
-.parallax-next {
+.parallax-foto2 {
   background-image: url('/images/logo.png'); /* Tweede afbeelding */
 }
+
 
 .hero-overlay {
   position: absolute;

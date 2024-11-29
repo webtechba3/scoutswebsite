@@ -1,5 +1,25 @@
 extends ../layout.pug
 
 block content
-  h1 Welpen
-  p Welkom bij de Welpen!
+  h1 #{title}
+
+  div.table-container
+        h2 Activiteiten
+        
+        if activiteiten.length
+            table(border="1", cellpadding="5", cellspacing="0")
+                thead
+                    tr
+                        th Titel
+                        th Bericht
+                        th Auteur
+                        th Datum
+                tbody
+                    each activiteit in activiteiten
+                        tr
+                            td= activiteit.title
+                            td= activiteit.message
+                            td= activiteit.auteur  
+                            td= new Date(activiteit.createdAt).toLocaleString()
+        else
+            p Er zijn geen activiteiten beschikbaar.

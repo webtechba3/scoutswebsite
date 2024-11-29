@@ -5,5 +5,7 @@ block content
     each tak in takken
       .tak
         a(href=`/tak/${tak.slug}`)
-          img(src=`/images/${tak.image}` alt=tak.name class="tak-image")
+          img(src=`/images/takken/groot/${tak.image}` alt=tak.name class="tak-image")
+          div.tak-small-icon
+            img(src=`/images/takken/logo/${tak.image}` alt="Klein pictogram")
           span.tak-name= tak.name

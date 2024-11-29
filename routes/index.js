@@ -44,4 +44,5 @@ router.get('/privacy-policy', function(req, res, next) {
   res.render('privacy-policy');
 });
 router.post
+
 module.exports = router;

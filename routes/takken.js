@@ -5,8 +5,8 @@ const router = express.Router();
 const takken = [
   { name: "Kapoenen", slug: "kapoenen", image: "kapoenen.jpg" },
   { name: "Welpen", slug: "welpen", image: "welpen.jpg" },
-  { name: "Roeland", slug: "roeland", image: "roeland-parcival.jpg" },
-  { name: "Parcival", slug: "parcival", image: "roeland-parcival.jpg" },
+  { name: "Roeland", slug: "roeland", image: "roeland.jpg" },
+  { name: "Parcival", slug: "parcival", image: "parcival.jpg" },
   { name: "Givers", slug: "givers", image: "givers.jpg" },
   { name: "Jin", slug: "jin", image: "jin.jpg" },
   { name: "Leiding", slug: "leiding", image: "leiding.jpg" },

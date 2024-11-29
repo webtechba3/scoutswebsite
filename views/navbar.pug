@@ -3,8 +3,10 @@ header
     .logo
       a(href="/")
         h1 Sint-Martinus scouts 
+    button.menu-btn(type="button", aria-label="Menu")
+      
+      i.fa.fa-bars
     ul.nav-links
-     
       li
         a(href="/takken") Takken
         ul.dropdown
@@ -25,5 +27,3 @@ header
         li: a(href="/Account") Account
       else 
         li: a(href="/inloggen") Inloggen
-
-      
