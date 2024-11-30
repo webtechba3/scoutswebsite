@@ -655,3 +655,35 @@ footer a:hover {
 .input-container i:hover {
   color: #000; /* Verander kleur bij hover */
 }
+
+/* Knop om dingen uit contactformulier te verwijderen*/
+/* Zorg ervoor dat de rij-wrapper relatief gepositioneerd is */
+.row-wrapper {
+  position: relative;
+  display: flex; /* Houd de inhoud en knop op één lijn */
+  align-items: center;
+}
+
+/* Positioneer de knop rechts buiten de rij */
+.delete-button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ff5c5c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.delete-button:hover {
+  background-color: #ff3b3b;
+}
+
+.delete-form {
+  margin: 0; /* Zorg ervoor dat de form geen extra ruimte inneemt */
+}
+

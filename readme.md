@@ -10,7 +10,7 @@ spotify api
 
 tab van takken beter maken , eventeel fotos toevoegen 
 
-weer api op homescreen 
+//weer api op homescreen 
 
 cookies google analytics
 
