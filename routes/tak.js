@@ -3,7 +3,7 @@ const axios = require('axios');
 const router = express.Router();
 
 // Array van takken
-const takken = ['Kapoenen', 'Welpen', 'Roeland', 'Parcival', 'Givers', 'Jin', 'Leiding'];
+const takken = ['kapoenen', 'welpen', 'roeland', 'parcival', 'givers', 'jin', 'leiding'];
 const kalenders =  ['k', 'w', 'https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Europe%2FBrussels&showPrint=0&src=cm9lbGFuZHNjb3V0c2llcGVyQGdtYWlsLmNvbQ&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23A79B8E&color=%2333B679']
 const path = require('path');
 /*takken.forEach(tak => {
