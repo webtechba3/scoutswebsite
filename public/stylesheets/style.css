@@ -292,6 +292,9 @@ header.scrolled {
   padding: 10px 20px;
 }
 
+.videooverlay{
+  margin-bottom : -10%;
+}
 /* Parallax Secties */
 .parallax-foto1, .parallax-foto2, .parallax-video {
   position: relative;
@@ -303,16 +306,17 @@ header.scrolled {
 }
 
 .parallax video {
-  position: absolute; /* Absolute positionering om te centreren */
+  position: relative; /* Absolute positionering om te centreren */
   top: 50%;
   left: 50%;
+  margin-top: 30%;
   transform: translate(-50%, -50%); /* Precisie-centrering */
   min-width: 100%; /* Zorg dat de video de breedte van de container vult */
   min-height: 100%; /* Zorg dat de video de hoogte van de container vult */
   width: auto; /* Schaal proportioneel */
   height: auto; /* Schaal proportioneel */
   object-fit: cover; /* Vul de container zonder de video te vervormen */
-  z-index: -1; /* Zorg dat de video achter de overlay-inhoud zit */
+  z-index: 1000; /* Zorg dat de video achter de overlay-inhoud zit */
 }
 
 .parallax-foto1 {
@@ -447,7 +451,7 @@ form button:hover {
 footer {
   background-color: #102820;
   color: #CABA9C;
-  margin-top : 250px;
+  margin-top : 20%;
   padding: 40px;
   padding-bottom: 70px;
   
