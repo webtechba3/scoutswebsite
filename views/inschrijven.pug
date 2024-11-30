@@ -4,20 +4,21 @@ block content
     if role === 'leiding'
         h1 Overzicht van inschrijvingen
         if inschrijvingen.length > 0
-            table(border="1", cellpadding="5", cellspacing="0" align="center")
-                thead
-                    tr
-                        th Naam
-                        th Voornaam
-                        th Email
-                        th Woonplaats
-                tbody
-                    each inschrijving in inschrijvingen
+            .table-container
+                table(border="1", cellpadding="5", cellspacing="0" align="center")
+                    thead
                         tr
-                            td= inschrijving.naam
-                            td= inschrijving.voornaam
-                            td= inschrijving.email
-                            td= inschrijving.woonplaats
+                            th Naam
+                            th Voornaam
+                            th Email
+                            th Woonplaats
+                    tbody
+                        each inschrijving in inschrijvingen
+                            tr
+                                td= inschrijving.naam
+                                td= inschrijving.voornaam
+                                td= inschrijving.email
+                                td= inschrijving.woonplaats
         else
             p Er zijn nog geen inschrijvingen gevonden.
     else

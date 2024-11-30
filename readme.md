@@ -12,5 +12,13 @@ tab van takken beter maken , eventeel fotos toevoegen
 
 weer api op homescreen 
 
+cookies google analytics
+
+//weer beetje uitbereiden 
+
+mogelijkheid om contacteer ons te verwijderen uit database
+en mogelijkheid om inschrijvingen te verwijderen
+
+library met oog zoals hamburger
 
 

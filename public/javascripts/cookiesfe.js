@@ -1,4 +1,6 @@
-window.onload = function () {
+//google analytics
+
+document.addEventListener('DOMContentLoaded', () => {
     const cookieBanner = document.getElementById("cookie-banner");
     const acceptAllButton = document.getElementById("accept-all");
     const essentialOnlyButton = document.getElementById("essential-only");
@@ -84,4 +86,4 @@ window.onload = function () {
     function hideCookieBanner() {
       cookieBanner.style.display = "none";
     }
-  };
+});

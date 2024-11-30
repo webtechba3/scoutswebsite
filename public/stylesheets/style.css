@@ -261,11 +261,6 @@ header.scrolled {
   }
 }
 
-
-
-
-
-
 .table-container {
   margin: 0 auto;
   padding: 20px;
@@ -530,3 +525,106 @@ footer a:hover {
     background-color: #181a18;
   }
 }
+
+/* Algemene weer-container */
+.weather-container {
+  max-width: 600px;
+  margin: 20px auto;
+  margin-top: 10%;
+  padding: 20px;
+  background-color: #fdfdfd; /* Lichter wit voor een frissere uitstraling */
+  border: 1px solid #ccc; /* Zachtere randkleur */
+  border-radius: 15px; /* Meer afgeronde hoeken */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Diepere schaduw */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Modernere font-stijl */
+}
+
+/* Titel */
+.weather-container h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #222; /* Sterkere donkere kleur */
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ddd; /* Onderlijn voor duidelijkheid */
+  padding-bottom: 10px;
+}
+
+/* Huidig weer */
+.weather-container h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #333; /* Donkere kleur voor subtiele accentuering */
+  margin-bottom: 10px;
+}
+
+.weather-container p {
+  font-size: 1rem;
+  color: #555; /* Zachtere tekstkleur */
+  margin: 5px 0;
+}
+
+/* Dagelijkse voorspelling */
+.weather-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.weather-container li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Verdeel inhoud gelijkmatig */
+  padding: 15px 10px;
+  border-bottom: 1px solid #ddd; /* Dunne lijn tussen items */
+  font-size: 1rem;
+  transition: background-color 0.3s ease; /* Hover-effect */
+}
+
+.weather-container li:hover {
+  background-color: #f9f9f9; /* Licht grijze achtergrond bij hover */
+}
+
+.weather-container li:last-child {
+  border-bottom: none; /* Verwijder lijn onder laatste item */
+}
+
+/* Pictogramstijl */
+.weather-container i {
+  font-size: 1.5rem; /* Maak pictogrammen groter */
+  color: #555; /* Match pictogramkleur met tekstkleur */
+  margin-right: 10px;
+}
+
+/* Dag naam */
+.weather-container strong {
+  color: #444;
+  font-weight: bold;
+  margin-right: 10px;
+  font-size: 1.1rem; /* Maak de dagnaam iets groter */
+}
+
+/* Temperatuur en neerslag stijl */
+.weather-container span {
+  color: #666;
+}
+
+.weather-container span:not(:last-child) {
+  margin-right: 15px; /* Ruimte tussen de details */
+}
+
+/* Media-query voor mobiel */
+@media (max-width: 600px) {
+  .weather-container {
+    padding: 15px;
+  }
+
+  .weather-container li {
+    flex-direction: column;
+    align-items: flex-start; /* Tekst links uitlijnen */
+  }
+
+  .weather-container li i {
+    margin-bottom: 10px; /* Ruimte tussen pictogram en tekst */
+  }
+}
+
