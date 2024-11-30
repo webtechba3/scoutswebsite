@@ -25,8 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
     essentialOnlyButton.onclick = function () {
       // Stel de Google AdSense cookie in
       // 2 rd party cookies
-      setCookie("__gads", "ID=1f5d1e0b01a6d54a:T=1691234567:RT=1691234567:S=ALNI_MZ5FjXYZQJSK_D9slokLRxHXJ8_wg", 365);
-      setCookie("_ga", "GA1.2.1234567890.1691234567", 365);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PC3EB3Z889');
 
       setCookie("cookie_consent", "essential", 365);
       applyCookieSettings("essential");
