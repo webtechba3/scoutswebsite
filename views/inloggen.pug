@@ -1,19 +1,17 @@
 extends layout
 
-    
 block content
     h1 Inloggen
-    form(action="/inloggen/verzendInlogForm", method="post" id = "inlogForm" enctype="application/x-www-form-urlencoded") 
+    form(action="/inloggen/verzendInlogForm", method="post" id="inlogForm" enctype="application/x-www-form-urlencoded")
         p
             label(for="email") Email: 
-            div
+            div.input-container
                 input(type="email", name="email" placeholder="Voer uw email in") 
-        p 
-            label(for="password") Wachtwoord:
-            div
-                input#password(type="password" name = "password" placeholder="Voer uw wachtwoord in")
-                span.toggle-password(onclick="togglePasswordbol()") 👁️
         p
-            button(type="submit") log in   
-        
+            label(for="password") Wachtwoord:
+            div.input-container
+                input#password(type="password" name="password" placeholder="Voer uw wachtwoord in")
+                i.fas.fa-eye(onmouseover="togglePassword(true)" onmouseout="togglePassword(false)") 
+        p
+            button(type="submit") log in
         script(src="/javascripts/inloggenfe.js")

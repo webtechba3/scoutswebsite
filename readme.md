@@ -19,6 +19,6 @@ cookies google analytics
 mogelijkheid om contacteer ons te verwijderen uit database
 en mogelijkheid om inschrijvingen te verwijderen
 
-library met oog zoals hamburger
+//library met oog zoals hamburger
 
 

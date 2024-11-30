@@ -628,3 +628,29 @@ footer a:hover {
   }
 }
 
+/* oogje ww */
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-container input {
+  width: 100%;
+  padding-right: 2rem; /* Ruimte voor het oogpictogram */
+  box-sizing: border-box;
+}
+
+.input-container i {
+  position: absolute;
+  padding-bottom: 20px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #333;
+  transition: color 0.2s;
+}
+
+.input-container i:hover {
+  color: #000; /* Verander kleur bij hover */
+}

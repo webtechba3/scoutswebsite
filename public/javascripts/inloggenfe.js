@@ -1,9 +1,35 @@
-function togglePasswordbol() {
+// Hover-functionaliteit voor het wachtwoord
+document.addEventListener("DOMContentLoaded", () => {
     const passwordField = document.getElementById('password');
-    passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
+    const eyeIcon = document.querySelector('.fa-eye');
+  
+    // Controleer of het wachtwoordveld en oogicoon aanwezig zijn
+    if (passwordField && eyeIcon) {
+      // Voeg hover-eventlisteners toe aan het oogicoon
+      eyeIcon.addEventListener('mouseenter', () => {
+        passwordField.type = 'text'; // Toon wachtwoord bij hover
+      });
+  
+      eyeIcon.addEventListener('mouseleave', () => {
+        passwordField.type = 'password'; // Verberg wachtwoord bij hover
+      });
+    } else {
+      console.error("Wachtwoordveld of oogicoon niet gevonden!");
     }
-    
-    buttonsubmit.addEventListener('click', () => { // lambda-functie
+  });
+  /*
+  // Functie om het wachtwoord te toggelen (indien nodig)
+  function togglePasswordbol() {
+    const passwordField = document.getElementById('password');
+    if (passwordField) {
+      passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
+    } else {
+      console.error("Wachtwoordveld niet gevonden!");
+    }
+  }
+  */
+  // Verzend het formulier via AJAX
+  buttonsubmit.addEventListener('click', () => { // lambda-functie
 
     const form = document.getElementById('inlogForm');
     /*if (getCookie("cookie_consent")) {*/
@@ -26,14 +52,15 @@ function togglePasswordbol() {
 
     });*/
 });
-// Functie om cookies te lezen
-function getCookie(name) {
+  
+  // Functie om cookies te lezen
+  function getCookie(name) {
     const nameEQ = name + "=";
     const ca = document.cookie.split(';');
     for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      let c = ca[i].trim();
+      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
     }
     return null;
-}
+  }
+  
