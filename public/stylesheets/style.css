@@ -263,6 +263,7 @@ header.scrolled {
 
 .table-container {
   margin: 0 auto;
+  margin-bottom: 10%;
   padding: 20px;
   max-width: 90%;
   background-color: #f9f9f9;
