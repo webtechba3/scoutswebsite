@@ -89,7 +89,7 @@ const path = require('path');
             */
             // Geef het pad naar de juiste submap voor de betreffende tak
             
-            const takViewPath = path.join(__dirname, '../views/tak', tak);
+            const takViewPath = path.join(__dirname, '../views', tak);
             res.render(takViewPath, { title: `${tak}`, activiteiten: activiteiten });
             console.log(`Ophalen activiteiten ${tak}`, activiteiten);
         } catch (error) {
