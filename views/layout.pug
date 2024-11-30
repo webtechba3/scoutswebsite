@@ -24,12 +24,12 @@ html
   body
   <!-- Google tag (gtag.js) -->
     script(async src="https://www.googletagmanager.com/gtag/js?id=G-PC3EB3Z889")
-
-    include navbar.pug
-    include cookie.pug
-    main
-      block content
-    
-    include footer.pug
+    .page-container
+      include navbar.pug
+      include cookie.pug
+      main
+        block content
+      
+      include footer.pug
 
     script(src="/javascripts/navbar.js")

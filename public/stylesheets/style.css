@@ -198,6 +198,7 @@ header.scrolled {
   width: 100%;
   max-width: 300px; /* Beperk breedte tot consistentie */
   height: auto; /* Behoud aspectratio */
+  border-radius: 15px; /* Afronding van de hoeken */
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover-effecten */
 }
 
@@ -447,6 +448,28 @@ form button:hover {
   background-color: #45a049;
 }
 
+/* Zorg ervoor dat de hele pagina minimaal de hoogte van de viewport heeft */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main moet uitbreidbaar zijn om ruimte in te nemen */
+main {
+  flex: 1;
+}
+
+/* Footer blijft onderaan */
+footer {
+  background-color: #102820;
+  color: #CABA9C;
+  padding: 40px;
+  padding-bottom: 70px;
+  text-align: center;
+}
+
+
 /* Footer */
 footer {
   background-color: #102820;
@@ -690,4 +713,3 @@ footer a:hover {
 .delete-form {
   margin: 0; /* Zorg ervoor dat de form geen extra ruimte inneemt */
 }
-
