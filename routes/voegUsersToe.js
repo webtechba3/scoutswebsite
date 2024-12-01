@@ -25,7 +25,7 @@ router.post('/voegToe',requireLeiding, async (req, res) => {
     console.log('Ingevoegd document met ID:', result.insertedId);
     console.log( naam + " " + voornaam + " " + email + " " + wachtwoord+ tak);
 
-    res.render('voegUsersToe', { message: 'Gebruiker met naam  '+naam + ' ' +voornaam +' toegevoegd na hashen' });
+    res.render('voegUsersToe', { message: 'Gebruiker met naam  '+naam + ' ' +voornaam +' toegevoegd' });
     
 });
 module.exports = router;
