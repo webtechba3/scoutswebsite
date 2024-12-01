@@ -15,7 +15,7 @@ This project is built using Node.js and includes a complete Node.js environment 
 ## Installation
 1. Clone this repository to your local machine:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/webtechba3/scoutswebsite/blob/hulp/readme.md
    cd <project-folder>
    ```
 
