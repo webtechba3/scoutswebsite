@@ -295,6 +295,7 @@ header.scrolled {
 
 /* Parallax Secties */
 .parallax-foto1, .parallax-foto2, .parallax-video {
+  margin: 0 auto;
   position: relative;
   background-size: cover;
   background-position: center;
@@ -304,6 +305,7 @@ header.scrolled {
 }
 
 .parallax video {
+  margin: 0 auto;
   position: relative; /* Absolute positionering om te centreren */
   top: 50%;
   border-radius: 15px;
