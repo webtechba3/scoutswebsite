@@ -26,6 +26,9 @@ app.use((req, res, next) => {
   res.locals.achternaam = req.session ? req.session.achternaam : null;
   next();
 });
+// Add helmet to the middleware chain.
+// Set CSP headers to allow our Bootstrap and jQuery to be served
+
 
 
 const indexRouter = require('./routes/index');
