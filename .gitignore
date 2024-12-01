@@ -1,8 +1,6 @@
 .vscode/*
 *.log
-
 node_modules
-
 .git
 .svn
 .hg
