@@ -1,6 +1,5 @@
-Hier is de README in het Engels, klaar om te kopiëren:
-
-# Project Name
+# Scouts sint martinus website
+https://scoutswebsite.onrender.com/
 
 **Branch Maintained by:**  
 Thibaut Beck & Tano Pannekoecke
@@ -15,7 +14,7 @@ This project is built using Node.js and includes a complete Node.js environment 
 ## Installation
 1. Clone this repository to your local machine:
    ```bash
-   git clone https://github.com/webtechba3/scoutswebsite/blob/hulp/readme.md
+   git clone https://github.com/webtechba3/scoutswebsite/tree/hulp)
    cd <project-folder>
    ```
 
