@@ -16,7 +16,7 @@ app.use(session({
   resave: false,
   name: 'SessionID', // Geef de sessie een naam
   saveUninitialized: true,
-  cookie: { secure: true ,httpOnly: true, sameSite: 'Lax' } // Zet op true als je HTTPS gebruikt
+  cookie: { secure: false ,httpOnly: true, sameSite: 'Lax' } // Zet op true als je HTTPS gebruikt
 }));
 // Middleware om sessie-informatie beschikbaar te maken in alle Pug-templates
 app.use((req, res, next) => {
