@@ -6,6 +6,7 @@ const logger = require('morgan');
 const mongoose = require("mongoose"); 
 const session = require('express-session');
 const crypto = require('crypto');
+const helmet = require("helmet");
 require('dotenv').config();
 
 const app = express();
@@ -26,6 +27,15 @@ app.use((req, res, next) => {
   res.locals.achternaam = req.session ? req.session.achternaam : null;
   next();
 });
+// Add helmet to the middleware chain.
+// Set CSP headers to allow our Bootstrap and jQuery to be served
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      "script-src": ["'self'", "code.jquery.com", "cdn.jsdelivr.net"],
+    },
+  }),
+);
 
 
 const indexRouter = require('./routes/index');
