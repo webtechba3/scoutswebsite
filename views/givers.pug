@@ -1,24 +1,33 @@
 extends layout.pug
 
 block content
-  h1 #{title}
-  div.table-container
-        h2 Activiteiten
-        if activiteiten.length
-            table(border="1", cellpadding="5", cellspacing="0")
-                thead
-                    tr
-                        th Titel
-                        th Bericht
-                        th Auteur
-                        th Datum
-                tbody
-                    each activiteit in activiteiten
+    h1 #{title}
+
+    div.table-container
+            h2 Activiteiten
+            
+            if activiteiten.length
+                table(border="1", cellpadding="5", cellspacing="0")
+                    thead
                         tr
-                            td= activiteit.title
-                            td= activiteit.message
-                            td= activiteit.auteur  
-                            td= new Date(activiteit.createdAt).toLocaleString()
-        else
-            p Er zijn geen activiteiten beschikbaar.
- 
+                            th Titel
+                            th Bericht
+                            th Auteur
+                            th Datum
+                    tbody
+                        each activiteit in activiteiten
+                            tr
+                                td= activiteit.title
+                                td= activiteit.message
+                                td= activiteit.auteur  
+                                td= new Date(activiteit.createdAt).toLocaleString()
+            else
+                p Er zijn geen activiteiten beschikbaar.
+    h2(align='center') Agenda
+        div.responsive-iframe-container(align='center')
+            iframe(
+                src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Europe%2FBrussels&showPrint=0&src=cm9lbGFuZHNjb3V0c2llcGVyQGdtYWlsLmNvbQ&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23A79B8E&color=%2333B679"
+                frameborder="0"
+                scrolling="no"
+                allowfullscreen
+            )

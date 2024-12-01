@@ -1,7 +1,6 @@
 /* Algemene Body Stijl */
 html,body {
-
- 
+  
   height: 100%; /* Vul de gehele viewport-hoogte */
   margin: 0;
   font-family: "Lora", serif;
@@ -274,8 +273,8 @@ header.scrolled {
 }
 
 .table-container table {
-  word-wrap: break-word;
-  word-break: break-word;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .table-container th, .table-container td {
@@ -309,9 +308,8 @@ header.scrolled {
   top: 50%;
   border-radius: 15px;
   left: 50%;
-  margin-top: 10%;
-  ;
-  transform: translate(-50%, 0%); /* Precisie-centrering */
+  margin-top: 30%;
+  transform: translate(-50%, -50%); /* Precisie-centrering */
   min-width: 100%; /* Zorg dat de video de breedte van de container vult */
   min-height: 100%; /* Zorg dat de video de hoogte van de container vult */
   width: auto; /* Schaal proportioneel */
@@ -714,3 +712,34 @@ footer a:hover {
 .delete-form {
   margin: 0; /* Zorg ervoor dat de form geen extra ruimte inneemt */
 }
+
+.responsive-iframe-container {
+  position: relative;
+  margin: 0 auto;
+  width: 80%; /* Breedte van het iframe-container */
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0; /* Zorg dat de hoogte automatisch wordt bepaald */
+  /*overflow: hidden; /* Verberg alles buiten de container */
+}
+
+.responsive-iframe-container iframe {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%; /* Laat het iframe de volledige breedte van de container innemen */
+  height: 100%; /* Pas de hoogte proportioneel aan */
+  border: 0; /* Verwijder de standaardrand */
+}
+
+@media (max-width: 768px) {
+  .responsive-iframe-container {
+    padding-bottom: 75%; /* Verhoog de aspect ratio voor kleinere schermen */
+  }
+}
+
+@media (max-width: 480px) {
+  .responsive-iframe-container {
+    padding-bottom: 100%; /* Pas aan naar een 1:1 verhouding */
+  }
+}
+
