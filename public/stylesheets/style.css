@@ -274,8 +274,8 @@ header.scrolled {
 }
 
 .table-container table {
-  width: 100%;
-  border-collapse: collapse;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .table-container th, .table-container td {
@@ -309,8 +309,9 @@ header.scrolled {
   top: 50%;
   border-radius: 15px;
   left: 50%;
-  margin-top: 30%;
-  transform: translate(-50%, -50%); /* Precisie-centrering */
+  margin-top: 10%;
+  ;
+  transform: translate(-50%, 0%); /* Precisie-centrering */
   min-width: 100%; /* Zorg dat de video de breedte van de container vult */
   min-height: 100%; /* Zorg dat de video de hoogte van de container vult */
   width: auto; /* Schaal proportioneel */
