@@ -1,4 +1,4 @@
-# Scouts sint martinus website
+# Scouts Sint Martinus website
 https://scoutswebsite.onrender.com/
 
 **Branch Maintained by:**  
