@@ -1,25 +1,42 @@
+# Scouts sint martinus website
+https://scoutswebsite.onrender.com/
 
-applicatie runnen node ./bin/www
+**Branch Maintained by:**  
+Thibaut Beck & Tano Pannekoecke
 
+## Overview
+This project is built using Node.js and includes a complete Node.js environment for running the application. Below, you will find instructions to install the required libraries and start the application.
 
+## Requirements
+- [Node.js](https://nodejs.org/) (version 20 or higher recommended)
+- npm (Node Package Manager, included with Node.js)
 
-#Todo 
-extra third party cookies toevoegen want geen idee of die van nu werken (niet veel werk  wel belangrijk )
-mooier maken van alle tabellen met een div 
-spotify api
+## Installation
+1. Clone this repository to your local machine:
+   ```bash
+   git clone https://github.com/webtechba3/scoutswebsite/tree/hulp)
+   cd <project-folder>
+   ```
 
-tab van takken beter maken , eventeel fotos toevoegen 
+2. Install the required libraries:
+   ```bash
+   npm install
+   ```
 
-//weer api op homescreen 
+## Running the Application
+Start the application using the following command:
+```bash
+node ./bin/www
+```
 
-//cookies google analytics
-        nrml is het goed
+## Important Notes
+- Ensure that Node.js and npm are correctly installed on your system. You can check by running the following commands:
+  ```bash
+  node -v
+  npm -v
+  ```
+  These commands will display the installed versions.
 
-//weer beetje uitbereiden 
-
-//mogelijkheid om contacteer ons te verwijderen uit database en mogelijkheid om inschrijvingen 
-//te verwijderen
-
-//library met oog zoals hamburger
+- Adjust any configuration settings in the application before running it. Refer to the documentation or configuration files for guidance.
 
 
