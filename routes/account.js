@@ -116,8 +116,6 @@ router.post('/updateFoto', requireLeiding, upload.single('foto'), async (req, re
         );
 
         console.log('Nieuwe afbeelding opgeslagen in database:', fotoPath);
-
-        res.status(200).render('account', { message: 'Afbeelding succesvol geüpdatet.' });
     } catch (err) {
         console.error('Fout bij het updaten van afbeelding:', err.message);
         if (err instanceof multer.MulterError) {
