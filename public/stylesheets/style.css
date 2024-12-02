@@ -274,7 +274,8 @@ header.scrolled {
 
 .table-container table {
   width: 100%;
-  border-collapse: collapse;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .table-container th, .table-container td {
