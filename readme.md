@@ -28,7 +28,6 @@ Start the application using the following command:
 ```bash
 node ./bin/www
 ```
-
 ## Important Notes
 - Ensure that Node.js and npm are correctly installed on your system. You can check by running the following commands:
   ```bash
@@ -36,7 +35,7 @@ node ./bin/www
   npm -v
   ```
   These commands will display the installed versions.
-
 - Adjust any configuration settings in the application before running it. Refer to the documentation or configuration files for guidance.
+## updating picutes on the website will not update the pictures on github
 
 
