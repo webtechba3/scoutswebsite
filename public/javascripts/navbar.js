@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("DOMContentLoaded", function () {
   const menuBtn = document.querySelector(".menu-btn");
   const navLinks = document.querySelector(".nav-links");
+  const dropdownTakken = document.querySelector('[data-dropdown="takken-dropdown"]');
 
   if (!menuBtn || !navLinks) {
     console.error("menu-btn of nav-links niet gevonden");
@@ -44,6 +45,10 @@ document.addEventListener("DOMContentLoaded", function () {
     event.stopPropagation(); // Voorkom dat andere click-events worden geactiveerd
     navLinks.classList.toggle("mobile-nav");
     menuBtn.classList.toggle("open");
+    // Verberg de Takken-dropdown wanneer de hamburger wordt geopend
+    if (window.innerWidth <= 918 && dropdownTakken) {
+      dropdownTakken.style.display = navLinks.classList.contains("mobile-nav") ? "none" : "";
+    }
   });
 
   // Sluit de dropdown als je ergens anders klikt
@@ -52,6 +57,10 @@ document.addEventListener("DOMContentLoaded", function () {
       // Sluit alleen als er buiten de menu-btn en nav-links wordt geklikt
       navLinks.classList.remove("mobile-nav");
       menuBtn.classList.remove("open");
+       // Herstel de Takken-dropdown bij sluiten
+       if (dropdownTakken) {
+        dropdownTakken.style.display = "";
+      }
     }
   });
 
