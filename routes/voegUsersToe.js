@@ -1,3 +1,5 @@
+//voegUsersToe.js
+
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
@@ -66,7 +68,7 @@ router.post('/voegToe', requireLeiding, upload.single('foto'), async (req, res) 
     const { naam, voornaam, email, wachtwoord, tak } = req.body;
 
     // Controleer of alle verplichte velden zijn ingevuld
-    if (!naam || !voornaam || !email || !wachtwoord || !tak) {
+    if (!naam || !voornaam || !email || !wachtwoord || !tak || !req.file) {
       throw new Error('Alle velden zijn verplicht.');
     }
 

@@ -21,22 +21,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   
-buttonsubmit.addEventListener('click', () => { // lambda-functie
+  buttonsubmit.addEventListener('click', (event) => {
+    event.preventDefault(); // Voorkom standaard form-submit
 
-    //event.preventDefault(); // Voorkomt standaard form-submit
+    const form = document.getElementById('voegNieuwAccountToe'); // Selecteer het formulier
+    const formData = new FormData(form); // Gebruik FormData voor betere verwerking (inclusief file uploads)
 
-        $.ajax({
-            url: '/voegToe',
-            type: 'POST',
-            data: $(this).serialize(), // Verzamelt alle form-data
-            success: function(result) {
-                // Verwerkt de JSON-response van de server
-                
-                console.log(result);
-            },
-            error: function(err) {
-        
-                console.error(err);
-            }});
-            
+    $.ajax({
+        url: '/voegUserToe/voegToe', // Zorg ervoor dat de URL correct is
+        type: 'POST',
+        data: formData, // Gebruik FormData
+        processData: false, // Nodig om FormData correct te verwerken
+        contentType: false, // Nodig om multipart/form-data correct in te stellen
+        success: function (result) {
+            console.log('Resultaat:', result);
+            alert('Gebruiker succesvol toegevoegd!');
+        },
+        error: function (err) {
+            console.error('Fout bij toevoegen gebruiker:', err);
+            alert('Er ging iets mis. Controleer je invoer en probeer opnieuw.');
+        },
+    });
 });
+

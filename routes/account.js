@@ -18,11 +18,12 @@ const storage = multer.diskStorage({
         cb(null, imagePath); // Opslagmap voor foto's
     },
     filename: (req, file, cb) => {
-        // Dynamische naam: voornaam_achternaam_jaar.extensie
+        // Dynamische naam: voornaam_achternaam_jaar_tijdstempel.extensie
         const { voornaam } = req.session;
         const { achternaam } = req.session;
         const jaar = new Date().getFullYear(); // Huidig jaar
-        const filename = `${voornaam}_${achternaam}_${jaar}${path.extname(file.originalname)}`.replace(/\s+/g, '_'); // Vervang spaties door underscores
+        const tijdstempel = Date.now(); // Unieke tijdstempel
+        const filename = `${voornaam}_${achternaam}_${jaar}_${tijdstempel}${path.extname(file.originalname)}`.replace(/\s+/g, '_'); // Voeg tijdstempel toe
         cb(null, filename);
     }
 });
@@ -91,6 +92,7 @@ router.post('/wijzigWachtwoord', requireLeiding, async (req, res) => {
 // **Route om afbeelding te updaten**
 router.post('/updateFoto', requireLeiding, upload.single('foto'), async (req, res) => {
     try {
+        console.log('Route aangeroepen: /updateFoto');
         const user = await req.app.locals.usersCollection.findOne({ voornaam: req.session.voornaam });
         if (!user) throw new Error('Gebruiker niet gevonden');
 
@@ -105,17 +107,28 @@ router.post('/updateFoto', requireLeiding, upload.single('foto'), async (req, re
 
         // Controleer of een nieuwe afbeelding is geüpload
         if (!req.file) throw new Error('Geen bestand geüpload');
-
         console.log('Nieuw bestand geüpload:', req.file);
 
-        // Sla de nieuwe afbeelding op
+        // Controleer opslag van het nieuwe bestand
+        const newFilePath = path.join(imagePath, req.file.filename);
+        if (!fs.existsSync(newFilePath)) {
+            console.error('Het nieuwe bestand is niet opgeslagen:', newFilePath);
+            throw new Error('Nieuwe afbeelding kon niet worden opgeslagen.');
+        }
+
+        // Sla de nieuwe afbeelding op in de database
         const fotoPath = `/images/leiding/${req.file.filename}`;
-        await req.app.locals.usersCollection.updateOne(
+        const updateResult = await req.app.locals.usersCollection.updateOne(
             { _id: user._id },
             { $set: { foto: fotoPath } }
         );
 
-        console.log('Nieuwe afbeelding opgeslagen in database:', fotoPath);
+        if (updateResult.modifiedCount === 0) {
+            throw new Error('Fout bij het updaten van de database.');
+        }
+
+        console.log('Nieuwe afbeelding succesvol opgeslagen in database:', fotoPath);
+        res.status(200).render('account', { message: 'Afbeelding succesvol geüpdatet.' });
     } catch (err) {
         console.error('Fout bij het updaten van afbeelding:', err.message);
         if (err instanceof multer.MulterError) {

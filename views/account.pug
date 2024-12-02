@@ -19,7 +19,7 @@ block content
             div.input-container
                 input#newPassword(type="password" name="newPassword" placeholder="Voer uw nieuw wachtwoord in")
                 i.fas.fa-eye(data-target="newPassword")
-            button(type="submit") Verander
+            button(type="submit" id='wwveranderd') Verander
 
     section(align="center")
         h3 Wijzig profielfoto
@@ -27,7 +27,7 @@ block content
             p
                 label(for="foto") Upload nieuwe foto:
                 input(type="file", name="foto", accept="image/*")
-            button(type="submit") Update Foto
+            button(type="submit" id='uploadFotoButton') Update Foto
 
     if message
         p #{message}
