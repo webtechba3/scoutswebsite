@@ -1,5 +1,52 @@
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
+const fs = require('fs');
+const path = require('path');
+const multer = require('multer');
+
+// Map configureren voor afbeeldingen
+const imagePath = path.join(__dirname, '..', 'public', 'images', 'leiding');
+
+// Zorg ervoor dat de map bestaat
+if (!fs.existsSync(imagePath)) {
+    fs.mkdirSync(imagePath, { recursive: true });
+}
+
+// Multer configureren voor bestandsuploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, imagePath); // Opslagmap voor foto's
+    },
+    filename: (req, file, cb) => {
+        // Dynamische naam: voornaam_achternaam_jaar.extensie
+        const { voornaam } = req.session;
+        const { achternaam } = req.session;
+        const jaar = new Date().getFullYear(); // Huidig jaar
+        const filename = `${voornaam}_${achternaam}_${jaar}${path.extname(file.originalname)}`.replace(/\s+/g, '_'); // Vervang spaties door underscores
+        cb(null, filename);
+    }
+});
+
+// Validatie van bestandstype en grootte
+const fileFilter = (req, file, cb) => {
+    const allowedFileTypes = /jpeg|jpg|png|gif/;
+    const mimetype = allowedFileTypes.test(file.mimetype);
+    const extname = allowedFileTypes.test(path.extname(file.originalname).toLowerCase());
+
+    if (mimetype && extname) {
+        return cb(null, true);
+    }
+    cb(new Error('Alleen afbeeldingen van het type JPEG, JPG, PNG of GIF zijn toegestaan!'));
+};
+
+// Multer-instantie met limieten en validatie
+const upload = multer({
+    storage,
+    limits: { fileSize: 2 * 1024 * 1024 }, // Maximaal 2 MB
+    fileFilter,
+});
+
+// Middleware om te controleren of de gebruiker 'leiding' is
 function requireLeiding(req, res, next) {
     if (req.session.role === 'leiding') {
         return next(); // Ga door naar de volgende middleware of route-handler
@@ -7,62 +54,78 @@ function requireLeiding(req, res, next) {
     res.status(403).send('Toegang geweigerd: je hebt geen rechten om deze pagina te bekijken.');
 }
 
-router.get('/', requireLeiding , (req, res) => {
+// Toon accountpagina
+router.get('/', requireLeiding, (req, res) => {
     res.render('account');
 });
 
-router.post('/logout',requireLeiding ,(req, res) => {
+// Uitloggen
+router.post('/logout', requireLeiding, (req, res) => {
     if (req.session) {
-        // Verwijder specifike sessiegegevens
-        console.log('Uitloggen:', req.session.voornaam);
         delete req.session.role;
         delete req.session.voornaam;
         delete req.session.tak;
         delete req.session.achternaam;
         res.redirect('/inloggen');
-       
     } else {
-        console.error('Sessie niet beschikbaar');
         return res.status(400).send('Geen actieve sessie gevonden.');
     }
 });
 
-router.post('/wijzigWachtwoord',requireLeiding,  async (req, res) => {   
-    console.log("/wijzigWachtwoord");
-    const { oudwachtwoord , nieuwwachtwoord} = req.body; 
-    if (req.session) {
-        console.log('Wachtwoord wijzigen:', req.session.voornaam);
-        console.log('Nieuw wachtwoord:', req.body.wachtwoord);
-        const user = await req.app.locals.usersCollection.findOne({ voornaam :req.session.voornaam});
-        if (user) {
-     
-            // Vergelijk het ingevoerde wachtwoord met het gehashte wachtwoord uit de database
-            // het gewone passwoord moet niet gehashed worden, terwijl user.password wel gehashed is
-            console.log(user.psswd , " user.password");
-            console.log(oudwachtwoord , " password");
-        
-            
-            if (oudwachtwoord== user.psswd){ 
-                await req.app.locals.usersCollection.updateOne(
-                    { _id: user._id }, // Zoek de gebruiker op basis van hun ID
-                    { $set: { psswd: nieuwwachtwoord} } // Zet het nieuwe gehashte wachtwoord
-                );
-                console.log('Wachtwoord gewijzigd voor:', req.session.voornaam);
-                return res.status(200).json({ message: 'Wachtwoord gewijzigd.' });
-            } else {
-                console.error('Ongeldig wachtwoord');
-                return res.status(400).send('Ongeldig wachtwoord');
-            } 
+// Wachtwoord wijzigen
+router.post('/wijzigWachtwoord', requireLeiding, async (req, res) => {
+    const { oudwachtwoord, nieuwwachtwoord } = req.body;
+    const user = await req.app.locals.usersCollection.findOne({ voornaam: req.session.voornaam });
 
-        } else {
-            console.error('Gebruiker niet gevonden');
-            return res.status(400).send('Gebruiker niet gevonden');
-        }
+    if (user && oudwachtwoord === user.psswd) {
+        await req.app.locals.usersCollection.updateOne(
+            { _id: user._id },
+            { $set: { psswd: nieuwwachtwoord } }
+        );
+        return res.status(200).json({ message: 'Wachtwoord gewijzigd.' });
     } else {
-        console.error('Sessie niet beschikbaar');
-        return res.status(400).send('Geen actieve sessie gevonden.');
+        return res.status(400).send('Ongeldig wachtwoord of gebruiker niet gevonden.');
     }
+});
 
+// **Route om afbeelding te updaten**
+router.post('/updateFoto', requireLeiding, upload.single('foto'), async (req, res) => {
+    try {
+        const user = await req.app.locals.usersCollection.findOne({ voornaam: req.session.voornaam });
+        if (!user) throw new Error('Gebruiker niet gevonden');
+
+        // Verwijder de oude afbeelding als deze bestaat
+        if (user.foto) {
+            const oldFilePath = path.join(__dirname, '..', 'public', user.foto);
+            if (fs.existsSync(oldFilePath)) {
+                fs.unlinkSync(oldFilePath);
+                console.log('Oude afbeelding verwijderd:', oldFilePath);
+            }
+        }
+
+        // Controleer of een nieuwe afbeelding is geüpload
+        if (!req.file) throw new Error('Geen bestand geüpload');
+
+        console.log('Nieuw bestand geüpload:', req.file);
+
+        // Sla de nieuwe afbeelding op
+        const fotoPath = `/images/leiding/${req.file.filename}`;
+        await req.app.locals.usersCollection.updateOne(
+            { _id: user._id },
+            { $set: { foto: fotoPath } }
+        );
+
+        console.log('Nieuwe afbeelding opgeslagen in database:', fotoPath);
+
+        res.status(200).render('account', { message: 'Afbeelding succesvol geüpdatet.' });
+    } catch (err) {
+        console.error('Fout bij het updaten van afbeelding:', err.message);
+        if (err instanceof multer.MulterError) {
+            res.status(400).render('account', { message: 'Bestandsfout: ' + err.message });
+        } else {
+            res.status(500).render('account', { message: err.message });
+        }
+    }
 });
 
 module.exports = router;

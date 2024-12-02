@@ -1,14 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Eventlistener voor de uitlogknop
     const logoutButton = document.getElementById('logoutButton');
-    const changePasswordButton = document.getElementById('changePasswordButton');
-    const passwordForm = document.querySelector('form[action="/wijzigWachtwoord"]');
+    const passwordToggles = document.querySelectorAll('.fa-eye');
+
+    // Hover-functionaliteit voor wachtwoordvelden
+    passwordToggles.forEach((eyeIcon) => {
+        const targetId = eyeIcon.getAttribute('data-target'); // Haal de gekoppelde wachtwoordveld-ID op
+        const passwordField = document.getElementById(targetId);
+
+        if (passwordField) {
+            eyeIcon.addEventListener('mouseenter', () => {
+                passwordField.type = 'text'; // Toon wachtwoord
+            });
+
+            eyeIcon.addEventListener('mouseleave', () => {
+                passwordField.type = 'password'; // Verberg wachtwoord
+            });
+        } else {
+            console.error(`Wachtwoordveld met ID '${targetId}' niet gevonden!`);
+        }
+    });
 
     if (logoutButton) {
         logoutButton.addEventListener('click', (event) => {
             event.preventDefault(); // Voorkom standaard submit van het formulier
 
-            fetch('/account/logout', { // Zorg ervoor dat de URL correct is
+            fetch('/account/logout', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -17,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then((response) => {
                     if (response.ok) {
                         console.log('Uitgelogd:', response.statusText);
-                        // Doorsturen naar de homepage of inlogpagina
                         window.location.href = '/';
                     } else {
                         throw new Error('Uitloggen mislukt');
@@ -29,57 +45,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
         });
     }
-    
-    buttonsubmit.addEventListener('click', () => { // lambda-functie
 
-        const form = document.getElementById('inlogForm');
-        /*if (getCookie("cookie_consent")) {*/
-        $.ajax({
-        url: "/wijzigwachtwoord",
-        type: 'POST',
-        data: $(form).serialize(), // Verzamelt alle form-data
-        success: function(result) {
-            console.log(result);
-            // Voer hier acties uit bij succes, zoals een melding weergeven
-            form.reset(); // Leeg het formulier
-        },
-        error: function(err) {
-            console.error(err);
-            // Verwerk hier fouten, bijvoorbeeld door een melding weer te geven
-        }
-        })/*
-    const buttonsubmit = document.querySelector('button[type="submit"]'); 
-    buttonsubmit.addEventListener('click', () => { // lambda-functie
+    // Eventlistener voor wachtwoord wijzigen
+    const passwordForm = document.getElementById('wijzigwachtwoordform');
+    const changePasswordButton = document.querySelector('button[type="submit"]');
 
-        const form = document.getElementById('veranderwachtwoordform');
-    
-        $.ajax({
-        url: "/verzendInlogForm",
-        type: 'POST',
-        data: $(form).serialize(), // Verzamelt alle form-data
-        success: function(result) {
-            console.log(result);
-            // Voer hier acties uit bij succes, zoals een melding weergeven
-            form.reset(); // Leeg het formulier
-        },
-        error: function(err) {
-            console.error(err);
-            // Verwerk hier fouten, bijvoorbeeld door een melding weer te geven
-        }
-        });
-        });
-    */
-    /*
-    changePasswordButton.addEventListener('click', (event) => {
-            event.preventDefault(); // Voorkom standaard submit van het formulier
+    if (passwordForm && changePasswordButton) {
+        changePasswordButton.addEventListener('click', (event) => {
+            event.preventDefault(); // Voorkom standaard formulierverzending
 
             const formData = new FormData(passwordForm);
 
-
-            $.ajax({
-                url: "/wijzigWachtwoord",
-                type: 'POST',
-                data: $(formData).serialize()})
+            fetch('/account/wijzigwachtwoord', {
+                method: 'POST',
+                body: formData,
+            })
                 .then((response) => {
                     if (response.ok) {
                         return response.json();
@@ -96,6 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.error('Fout bij wijzigen wachtwoord:', err);
                     alert('Er ging iets mis. Controleer je invoer en probeer opnieuw.');
                 });
-        });*/
-    });
+        });
+    }
 });

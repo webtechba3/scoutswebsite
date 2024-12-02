@@ -3,6 +3,18 @@ extends layout.pug
 block content
     h1 #{title}
 
+    // Toon de leiding
+    div.leiding-container
+        h2 Hoofd Leiding
+        if leiding.length
+            div.leiding-grid
+                each leider in leiding
+                    div.leiding-card
+                        img.leiding-image(src=leider.foto alt=`Profielfoto van ${leider.voornaam} ${leider.naam}`)
+                        p.leiding-name #{leider.voornaam} #{leider.naam}
+        else
+            p Geen leiding beschikbaar voor deze tak.
+
     div.table-container
             h2 Activiteiten
             

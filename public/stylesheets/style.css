@@ -292,6 +292,77 @@ header.scrolled {
   padding: 10px 20px;
 }
 
+/* Leiding-container */
+.leiding-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centreer de container */
+  margin: 20px 0;
+  text-align: center;
+}
+
+/* Grid voor foto's */
+.leiding-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid */
+  gap: 20px; /* Ruimte tussen de kaarten */
+  justify-content: center; /* Centreer de grid-items horizontaal */
+  width: 100%;
+  max-width: 1200px; /* Optionele maximale breedte */
+}
+
+/* Leiding-kaarten */
+.leiding-card {
+  text-align: center;
+  border: none; /* Verwijder de rand */
+  box-shadow: none; /* Verwijder de schaduw */
+  padding: 0; /* Verwijder padding */
+  margin: 0; /* Verwijder marges */
+}
+
+/* Afbeeldingen in de leiding-kaarten */
+.leiding-image {
+  width: 150px; /* Breedte van de afbeelding */
+  height: 200px; /* Hoogte van de afbeelding */
+  object-fit: cover; /* Vul de rechthoek zonder de verhouding te verstoren */
+  border-radius: 15px; /* Geen afgeronde hoeken */
+  display: block; /* Zorg ervoor dat de afbeelding netjes inline wordt weergegeven */
+  margin: auto; /* Centreer de afbeelding in de kaart */
+}
+
+/* Naam van de leider */
+.leiding-name {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 5px; /* Ruimte tussen de naam en de afbeelding */
+}
+
+/* Responsieve aanpassingen */
+@media (max-width: 768px) {
+  .leiding-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Schaal naar kleinere kolommen */
+  }
+
+  .leiding-image {
+    width: 120px; /* Kleiner formaat op kleinere schermen */
+    height: 160px; /* Kleiner formaat op kleinere schermen */
+  }
+}
+
+@media (max-width: 480px) {
+  .leiding-grid {
+    grid-template-columns: 1fr; /* Eén kolom op zeer kleine schermen */
+    gap: 15px;
+  }
+
+  .leiding-image {
+    width: 100px; /* Nog kleiner formaat op zeer kleine schermen */
+    height: 130px;
+  }
+}
+
+
+
 
 /* Parallax Secties */
 .parallax-foto1, .parallax-foto2, .parallax-video {

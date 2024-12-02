@@ -1,24 +1,35 @@
 extends layout
-block content 
+
+block content
     h2(align="center") Account
-    section(align ="center") 
-        
-        form(action="account/logout" method="post" id = "logoutForm")
-        
-            button(type="submit" id="logoutButton") uitloggen
-            
-    section(align ="center") 
-        h3 Wijzig wachtwoord  
-        form(action="/account/wijzigwachtwoord", method="post" id = "wijzigwachtwoordform") 
+    section(align="center")
+        form(action="account/logout" method="post" id="logoutForm")
+            button(type="submit" id="logoutButton") Uitloggen
+
+    section(align="center")
+        h3 Wijzig wachtwoord
+        form(action="/account/wijzigwachtwoord", method="post", id="wijzigwachtwoordform")
             p
-                label(for="password") oud wachtwoord: 
-                div
-                    input(type="password", name="oudwachtwoord" placeholder="Voer uw oud wachtwoord in")
-                    
-            p 
-                label(for="password") nieuw wachtwoord:
-                div
-                    input(type="password" name = "nieuwwachtwoord" placeholder="Voer uw nieuw wachtwoord in")
-                    
-                button(type="submit") verander  
+                label(for="oldPassword") Oud wachtwoord:
+            div.input-container
+                input#oldPassword(type="password" name="oldPassword" placeholder="Voer uw oud wachtwoord in")
+                i.fas.fa-eye(data-target="oldPassword")
+            p
+                label(for="newPassword") Nieuw wachtwoord:
+            div.input-container
+                input#newPassword(type="password" name="newPassword" placeholder="Voer uw nieuw wachtwoord in")
+                i.fas.fa-eye(data-target="newPassword")
+            button(type="submit") Verander
+
+    section(align="center")
+        h3 Wijzig profielfoto
+        form(action="/account/updateFoto", method="post", enctype="multipart/form-data")
+            p
+                label(for="foto") Upload nieuwe foto:
+                input(type="file", name="foto", accept="image/*")
+            button(type="submit") Update Foto
+
+    if message
+        p #{message}
+
     script(src="/javascripts/accountfe.js")
