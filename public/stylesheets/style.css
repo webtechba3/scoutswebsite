@@ -817,3 +817,33 @@ footer a:hover {
   }
 }
 
+.responsive-iframe-container-inschrijven {
+  position: relative;
+  margin: 0 auto;
+  width: 100%; /* Breedte van het iframe-container */
+  padding-bottom: 100%; /* 16:9 aspect ratio */
+  height: 0; /* Zorg dat de hoogte automatisch wordt bepaald */
+  /*overflow: hidden; /* Verberg alles buiten de container */
+}
+
+.responsive-iframe-container-inschrijven iframe {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%; /* Laat het iframe de volledige breedte van de container innemen */
+  height: 100%; /* Pas de hoogte proportioneel aan */
+  border: 0; /* Verwijder de standaardrand */
+}
+
+@media (max-width: 768px) {
+  .responsive-iframe-container-inschrijven {
+    padding-bottom: 75%; /* Verhoog de aspect ratio voor kleinere schermen */
+  }
+}
+
+@media (max-width: 480px) {
+  .responsive-iframe-container-inschrijven {
+    padding-bottom: 100%; /* Pas aan naar een 1:1 verhouding */
+  }
+}
+
