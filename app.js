@@ -40,6 +40,7 @@ const takkenRouter = require('./routes/takken');
 const activiteitenRouter = require('./routes/activiteiten');
 const takRouter = require('./routes/tak');
 const accountRouter = require('./routes/account');  
+const spotifyRouter = require('./routes/spotify');
 
 
 
@@ -62,6 +63,7 @@ app.use('/takken', takkenRouter);
 app.use('/activiteiten', activiteitenRouter);
 app.use('/tak', takRouter);
 app.use('/account', accountRouter);
+app.use('/spotify', spotifyRouter);
 
 
 app.use('/voegUserToe', voegUsersToeRouter);

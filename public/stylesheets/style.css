@@ -793,7 +793,7 @@ footer a:hover {
   width: 80%; /* Breedte van het iframe-container */
   padding-bottom: 56.25%; /* 16:9 aspect ratio */
   height: 0; /* Zorg dat de hoogte automatisch wordt bepaald */
-  /*overflow: hidden; /* Verberg alles buiten de container */
+  overflow: hidden; /* Verberg alles buiten de container */
 }
 
 .responsive-iframe-container iframe {
@@ -824,7 +824,7 @@ footer a:hover {
   width: 100%; /* Breedte van het iframe-container */
   padding-bottom: 100%; /* 16:9 aspect ratio */
   height: 0; /* Zorg dat de hoogte automatisch wordt bepaald */
-  /*overflow: hidden; /* Verberg alles buiten de container */
+  overflow: hidden; /* Verberg alles buiten de container */
 }
 
 .responsive-iframe-container-inschrijven iframe {
@@ -848,4 +848,115 @@ footer a:hover {
     padding-bottom: 100%; /* Pas aan naar een 1:1 verhouding */
   }
 }
+
+/*Spotify*/
+/* Styling voor de playlist-container */
+.playlist-container {
+  margin: 20px 0; /* Ruimte boven en onder de container */
+  padding: 0;
+  border: none; /* Geen rand of achtergrond */
+}
+
+/* Styling voor de titel */
+.playlist-container h3 {
+  font-size: 1.5rem;
+  color: #4D2D18; /* Café Noir */
+  margin-bottom: 10px;
+  border-bottom: 1px solid #8A6240; /* Lijn onder de titel */
+  padding-bottom: 5px;
+}
+
+/* Styling voor de lijstitems */
+.playlist-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.playlist-container ul li {
+  padding: 10px 0;
+  border-bottom: 1px solid #CABA9C; /* Lichte scheiding tussen items */
+  color: #4D2D18; /* Café Noir */
+}
+
+/* Verwijder de laatste scheidingslijn */
+.playlist-container ul li:last-child {
+  border-bottom: none;
+}
+
+/* Paragrafen en teksten */
+.playlist-container p {
+  color: #4D2D18; /* Café Noir */
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+
+
+/* Styling voor formulieren */
+.form-container {
+  background: #fdfdfd;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+.form-container input[type="text"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.form-container button {
+  background: #1db954; /* Spotify groen */
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.form-container button:hover {
+  background: #17a447;
+}
+
+/* Responsive iframe container */
+.responsive-iframe-container-spotify {
+  position: relative;
+  margin: 0 auto;
+  width: 80%; /* Breedte van het iframe-container */
+  padding-bottom: 30%; /* 16:9 aspect ratio */
+  height: 0; /* Zorg dat de hoogte automatisch wordt bepaald */
+  overflow: hidden; /* Verberg alles buiten de container */
+}
+
+.responsive-iframe-container-spotify iframe {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  border-radius: 15px; /* Afronding van de hoeken */
+  width: 100%; /* Laat het iframe de volledige breedte van de container innemen */
+  height: 100%; /* Pas de hoogte proportioneel aan */
+  border: 0; /* Verwijder de standaardrand */
+}
+
+@media (max-width: 768px) {
+  .responsive-iframe-container-spotify {
+    padding-top: 75%; /* Verhoog de hoogteverhouding voor kleinere schermen */
+  }
+}
+
+@media (max-width: 480px) {
+  .responsive-iframe-container-spotify {
+    padding-top: 100%; /* Vierkante verhouding op zeer kleine schermen */
+  }
+}
+
+
 
