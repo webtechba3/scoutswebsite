@@ -13,41 +13,61 @@ block content
       // Embed iframe binnen een responsive container
       .responsive-iframe-container-spotify
         iframe(
-            style="border-radius:12px"
-            src="https://open.spotify.com/embed/playlist/51m5cuV7pH7xMNeMvWYmrQ?utm_source=generator"
-            width="80%"
-            height="352"
-            frameBorder="0"
-            allowfullscreen=""
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
+          style="border-radius:12px"
+          src="https://open.spotify.com/embed/playlist/51m5cuV7pH7xMNeMvWYmrQ?utm_source=generator"
+          width="80%"
+          height="352"
+          frameBorder="0"
+          allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
         )
-
 
       if playlist
         .playlist-container
           p Hier zijn de details van uw afspeellijst:
           ul
-            li Naam: #{playlist.name}
-            li Beschrijving: #{playlist.description || 'Geen beschrijving'}
-            li Aantal nummers: #{playlist.tracks.total}
+            li
+              strong Naam: 
+              span #{playlist.name}
+            li
+              strong Beschrijving: 
+              span #{playlist.description || 'Geen beschrijving'}
+            li
+              strong Aantal nummers: 
+              span #{playlist.tracks.total}
 
           h3 Nummers in de afspeellijst
           ul
             each track in playlist.tracks.items
               li
-                | #{track.track.name} door #{track.track.artists[0].name}
+                strong #{track.track.name} 
+                | door #{track.track.artists[0].name}
+
       else
         p Kan geen afspeellijstgegevens ophalen.
 
-      div
-        h3 Zoek naar een nummer
-        form(action="/spotify/search" method="POST")
+      div.search-container
+        h3 Zoek naar een nummer om toe te voegen
+        form.search-form(action="/spotify/search" method="POST")
           input(type="text" name="query" placeholder="Zoek naar een nummer" required)
           button(type="submit") Zoek
 
+        // Zoekresultaten container
+        if tracks
+          .search-results
+            ul
+              each track in tracks
+                li
+                  span #{track.name}
+                  span door #{track.artists[0].name}
+                  button.add-track(data-uri=track.uri) Voeg toe
+        else
+          .search-results
+            p Geen nummers gevonden.
+
         h3 Voeg een nummer toe aan de afspeellijst
-        form(action="/spotify/add-to-playlist" method="POST")
+        form(action="/spotify/add-to-playlist" method="POST" class="add-form")
           input(type="text" name="trackUri" placeholder="Spotify-URI of URL van het nummer" required)
           button(type="submit") Voeg toe
 

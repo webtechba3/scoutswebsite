@@ -94,10 +94,11 @@ router.post('/search', async (req, res) => {
             params: { q: query, type: 'track', limit: 5 },
         });
 
+        console.log('Spotify API Response:', response.data.tracks.items); // Debugging
         res.json(response.data.tracks.items);
     } catch (error) {
         console.error('Fout bij zoeken:', error.response?.data || error.message);
-        res.status(500).send('Zoeken mislukt.');
+        res.status(500).json({ error: 'Zoeken mislukt.' }); // Retourneer ook een JSON-fout
     }
 });
 
@@ -120,7 +121,8 @@ router.post('/add-to-playlist', async (req, res) => {
             headers: { Authorization: `Bearer ${req.session.accessToken}` },
         });
 
-        res.send({ success: true, message: 'Nummer toegevoegd!' });
+        // Stuur een succesbericht terug naar de client
+        res.status(200).send({ success: true, message: 'Nummer succesvol toegevoegd!' });
     } catch (error) {
         console.error('Fout bij toevoegen aan playlist:', error.response?.data || error.message);
         res.status(500).send({ success: false, message: 'Toevoegen mislukt.' });

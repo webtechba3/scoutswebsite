@@ -958,5 +958,77 @@ footer a:hover {
   }
 }
 
+/* Specifieke styling voor zoekresultaten */
+.search-container .search-results {
+  width: 80%; /* Zorgt ervoor dat de resultatencontainer gecentreerd is */
+  margin: 0 auto;
+}
 
+.search-container .search-results ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
+.search-container .search-results li {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr; /* Verdeling van kolommen: titel, artiest, knop */
+  align-items: center;
+  gap: 10px; /* Afstand tussen kolommen */
+  padding: 10px 0;
+  border-bottom: 1px solid #CABA9C;
+}
+
+.search-container .search-results li:last-child {
+  border-bottom: none;
+}
+
+.search-container .search-results li strong {
+  font-size: 1rem; /* Maak de tekst consistent */
+}
+
+.search-container .search-results li button {
+  justify-self: flex-end; /* Plaats de knop rechts in de rij */
+}
+
+.search-container .search-button, 
+.search-container .add-button {
+  background-color: #8A6240; /* Raw umber, passend bij je thema */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.search-container .search-button:hover, 
+.search-container .add-button:hover {
+  background-color: #714B31; /* Donkerder tint */
+}
+
+.search-container .search-input, 
+.search-container .add-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #CABA9C;
+  border-radius: 5px;
+}
+
+.search-container .search-input:focus, 
+.search-container .add-input:focus {
+  outline: none;
+  border-color: #8A6240;
+}
+
+/* Responsiviteit voor zoekresultaten */
+@media (max-width: 768px) {
+  .search-container .search-results li {
+    grid-template-columns: 1fr; /* Stapel de items op kleine schermen */
+    text-align: center;
+  }
+
+  .search-container .search-results li button {
+    justify-self: center; /* Plaats de knop in het midden */
+  }
+}
